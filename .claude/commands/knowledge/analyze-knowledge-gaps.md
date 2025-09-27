@@ -1,4 +1,22 @@
-# Args: `<topic/subtopic>` `[--depth=shallow|deep]` `[--suggest-fixes]`. v1.0.0. Identify missing or outdated knowledge content, analyze coverage gaps, and provide recommendations for knowledge base improvement.
+---
+description: "Identify missing or outdated knowledge content, analyze coverage gaps, and provide recommendations for knowledge base improvement"
+arguments:
+  - name: "topic/subtopic"
+    description: "Knowledge topic path to analyze for gaps"
+    required: true
+  - name: "--depth"
+    description: "Analysis depth level (shallow or deep)"
+    required: false
+  - name: "--suggest-fixes"
+    description: "Generate specific recommendations for addressing gaps"
+    required: false
+  - name: "_preview"
+    description: "analyze-knowledge-gaps <topic/subtopic> [--depth=shallow|deep] [--suggest-fixes]"
+    required: false
+version: "1.0.0"
+category: "knowledge"
+icon: "🔍"
+---
 
 Input: $ARGUMENTS (format: topic/subtopic [--depth=shallow|deep] [--suggest-fixes])
 

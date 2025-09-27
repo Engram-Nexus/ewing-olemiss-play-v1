@@ -1,4 +1,25 @@
-# Args: `<diagram-content>` `[--fix=true|false]` `[--output=report|fixed]` `[--strict=true|false]`. v1.0.0. Validate Mermaid diagram syntax and provide corrections.
+---
+description: "Validate Mermaid diagram syntax and provide corrections"
+arguments:
+  - name: "diagram-content"
+    description: "Mermaid diagram code to validate"
+    required: true
+  - name: "--fix"
+    description: "Automatically fix errors when possible (true/false)"
+    required: false
+  - name: "--output"
+    description: "Output format preference (report/fixed)"
+    required: false
+  - name: "--strict"
+    description: "Validation strictness level (true/false)"
+    required: false
+  - name: "_preview"
+    description: "validate-mermaid-syntax <diagram-content> [--fix] [--output] [--strict]"
+    required: false
+version: "1.0.0"
+category: "knowledge"
+icon: "🔍"
+---
 
 ## Summary
 

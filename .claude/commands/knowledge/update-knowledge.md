@@ -1,6 +1,19 @@
-# Args: `<topic/subtopic:block>` `["statement"]`. v1.2.1. Update knowledge base with structured topic blocks and subtopic architecture using agent orchestration for research and architectural guidance.
-
-**🚨 COMMAND EXECUTION NOTICE**: This is a Claude command file, not a bash script. Claude will process this file and execute the appropriate operations. DO NOT attempt to run this as `/update-knowledge` in bash.
+---
+description: "Update knowledge base with structured topic blocks and subtopic architecture using agent orchestration for research and architectural guidance"
+arguments:
+  - name: topic/subtopic:block
+    description: "Knowledge topic path with optional subtopics and block (e.g., auth/oauth:jwt)"
+    required: true
+  - name: statement
+    description: "Knowledge statement or content to add/update"
+    required: false
+  - name: _preview
+    description: "# Args: `<topic/subtopic:block>` `[statement]`. v1.2.2. Update knowledge base with structured topic blocks and subtopic architecture using agent orchestration for research and architectural guidance."
+    required: false
+version: "1.2.2"
+category: "Knowledge Management"
+icon: "📚"
+---
 
 ## Summary
 
@@ -8,24 +21,28 @@ This command orchestrates knowledge base updates using specialized agents to res
 
 ## Usage
 
-    /knowledge:update-knowledge <topic/subtopic:block> ["statement"]
+```bash
+/knowledge:update-knowledge <topic/subtopic:block> [statement]
+```
 
 ### Usage Examples
 
-    # Basic topic matrix update
-    /knowledge:update-knowledge authentication
-    
-    # Topic with content statement
-    /knowledge:update-knowledge authentication "Multi-factor authentication best practices"
-    
-    # Subtopic matrix update
-    /knowledge:update-knowledge authentication/oauth
-    
-    # Block-specific update
-    /knowledge:update-knowledge authentication/oauth:jwt-implementation "JWT tokens provide stateless authentication"
-    
-    # Complex nested subtopic with block
-    /knowledge:update-knowledge security/compliance/gdpr/data-protection:encryption "GDPR requires encryption of personal data"
+```bash
+# Basic topic matrix update
+/knowledge:update-knowledge authentication
+
+# Topic with content statement
+/knowledge:update-knowledge authentication "Multi-factor authentication best practices"
+
+# Subtopic matrix update
+/knowledge:update-knowledge authentication/oauth
+
+# Block-specific update
+/knowledge:update-knowledge authentication/oauth:jwt-implementation "JWT tokens provide stateless authentication"
+
+# Complex nested subtopic with block
+/knowledge:update-knowledge security/compliance/gdpr/data-protection:encryption "GDPR requires encryption of personal data"
+```
 
 ## Arguments
 
@@ -38,33 +55,35 @@ This command orchestrates knowledge base updates using specialized agents to res
   - **Structure**: Subtopics are folders within topic folders
   - **Blocks**: .md files within topic/subtopic folders
   - **Notation**: Use colon (:) to separate the path from the block name
-- `["statement"]`: Knowledge statement or content to add/update
+- `[statement]`: Knowledge statement or content to add/update
   - **Format**: Must be quoted if contains spaces or special characters
   - **Optional**: If omitted, will update matrix based on existing blocks
   - **Required**: When creating new blocks or updating specific content
 
 ## Examples
 
-    # Topic matrix update only
-    /knowledge:update-knowledge authentication
-    
-    # Subtopic matrix update 
-    /knowledge:update-knowledge authentication/oauth
-    
-    # Deep subtopic nesting
-    /knowledge:update-knowledge security/compliance/gdpr
-    
-    # Block-specific update with single subtopic
-    /knowledge:update-knowledge authentication/oauth:jwt-implementation "JWT tokens provide stateless authentication with short expiry times"
-    
-    # Block update with multiple nested subtopics
-    /knowledge:update-knowledge database/migrations/schema:reversible-changes "Always use reversible migrations for schema changes"
-    
-    # Complex nested subtopic with block
-    /knowledge:update-knowledge security/compliance/gdpr/data-protection:encryption "GDPR requires encryption of personal data at rest and in transit"
-    
-    # Multiple levels of nesting without block (creates subtopic matrix)
-    /knowledge:update-knowledge api/rest/v2/endpoints "Document all REST API v2 endpoints"
+```bash
+# Topic matrix update only
+/knowledge:update-knowledge authentication
+
+# Subtopic matrix update
+/knowledge:update-knowledge authentication/oauth
+
+# Deep subtopic nesting
+/knowledge:update-knowledge security/compliance/gdpr
+
+# Block-specific update with single subtopic
+/knowledge:update-knowledge authentication/oauth:jwt-implementation "JWT tokens provide stateless authentication with short expiry times"
+
+# Block update with multiple nested subtopics
+/knowledge:update-knowledge database/migrations/schema:reversible-changes "Always use reversible migrations for schema changes"
+
+# Complex nested subtopic with block
+/knowledge:update-knowledge security/compliance/gdpr/data-protection:encryption "GDPR requires encryption of personal data at rest and in transit"
+
+# Multiple levels of nesting without block (creates subtopic matrix)
+/knowledge:update-knowledge api/rest/v2/endpoints "Document all REST API v2 endpoints"
+```
 
 ## What This Command Does
 
@@ -673,6 +692,12 @@ The command provides graceful fallback when scripts are unavailable:
 
 ## Version History
 
+- v1.2.2 - **YAML Frontmatter Migration**: Updated to modern YAML header format per command file guidelines
+  - **ADDED**: YAML frontmatter with structured arguments array
+  - **ADDED**: _preview argument for proper slash command display
+  - **ENHANCED**: Category and icon metadata for better organization
+  - **UPDATED**: Code block formatting for all examples and usage
+  - **MAINTAINED**: All existing functionality and agent orchestration
 - v1.2.1 - **Command File Standards Compliance**: Applied comprehensive standards from command file rules
   - **ENHANCED**: Header format with execution notice and standardized structure
   - **STANDARDIZED**: Agent references using `@agent-` prefix format

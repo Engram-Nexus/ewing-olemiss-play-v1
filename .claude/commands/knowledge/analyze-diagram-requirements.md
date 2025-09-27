@@ -1,4 +1,22 @@
-# Args: `<description>` `[--type=auto|flowchart|class|sequence]` `[--output=analysis|json]`. v1.0.0. Analyze text descriptions to determine optimal Mermaid diagram type and extract key components.
+---
+description: "Analyze text descriptions to determine optimal Mermaid diagram type and extract key components"
+arguments:
+  - name: "description"
+    description: "Text description of what needs to be diagrammed"
+    required: true
+  - name: "--type"
+    description: "Force specific diagram type (auto|flowchart|class|sequence)"
+    required: false
+  - name: "--output"
+    description: "Output format (analysis|json)"
+    required: false
+  - name: "_preview"
+    description: "analyze-diagram-requirements \"<description>\" [--type=auto|flowchart|class|sequence] [--output=analysis|json]"
+    required: false
+version: "1.0.0"
+category: "analysis"
+icon: "🔍"
+---
 
 ## Summary
 

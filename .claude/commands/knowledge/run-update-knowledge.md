@@ -1,4 +1,22 @@
-# Args: `<topic/subtopic:block>` `[base-branch]` `[--description <"description">]`. v1.1.1. Orchestrate complete knowledge update workflow with git branch management, agent coordination, and PR creation.
+---
+description: "Orchestrate complete knowledge update workflow with git branch management, agent coordination, and PR creation"
+arguments:
+  - name: "topic/subtopic:block"
+    description: "Knowledge topic path with optional subtopics and block notation"
+    required: true
+  - name: "base-branch"
+    description: "Base branch for feature creation (default: 'dev')"
+    required: false
+  - name: "--description"
+    description: "Knowledge description or content to add/update (flag format)"
+    required: false
+  - name: "_preview"
+    description: "topic/subtopic:block [base-branch] [--description \"description\"]"
+    required: false
+version: "1.1.1"
+category: "knowledge"
+icon: "🚀"
+---
 
 Input: $ARGUMENTS (format: topic/subtopic:block [base-branch] [--description "description"])
 

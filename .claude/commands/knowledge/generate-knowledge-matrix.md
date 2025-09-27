@@ -1,4 +1,22 @@
-# Args: `<topic/subtopic>` `[--recursive]` `[--template=standard|compact|detailed]`. v1.0.0. Generate standalone knowledge matrices with customizable templates and recursive processing for comprehensive knowledge organization.
+---
+description: "Generate standalone knowledge matrices with customizable templates and recursive processing for comprehensive knowledge organization"
+arguments:
+  - name: topic_path
+    description: "Knowledge topic path to generate matrix for (format: topic/subtopic)"
+    required: true
+  - name: recursive
+    description: "Generate matrices for all subdirectories recursively (--recursive)"
+    required: false
+  - name: template
+    description: "Matrix template format: standard|compact|detailed (--template=value)"
+    required: false
+  - name: _preview
+    description: "# Args: `<topic/subtopic>` `[--recursive]` `[--template=standard|compact|detailed]`. v1.0.0. Generate standalone knowledge matrices with customizable templates and recursive processing for comprehensive knowledge organization"
+    required: false
+version: "1.0.0"
+category: "Knowledge Management"
+icon: "📋"
+---
 
 Input: $ARGUMENTS (format: topic/subtopic [--recursive] [--template=standard|compact|detailed])
 

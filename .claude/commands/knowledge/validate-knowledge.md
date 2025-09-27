@@ -1,4 +1,22 @@
-# Args: `<topic/subtopic>` `[--fix]` `[--verbose]`. v1.0.0. Validate knowledge structure and content integrity with optional automated fixes and detailed reporting.
+---
+description: "Validate knowledge structure and content integrity with optional automated fixes and detailed reporting"
+arguments:
+  - name: topic_path
+    description: "Knowledge topic path to validate (topic or topic/subtopic format)"
+    required: true
+  - name: fix
+    description: "Automatically fix discovered issues where possible (--fix flag)"
+    required: false
+  - name: verbose
+    description: "Provide detailed validation reporting (--verbose flag)"
+    required: false
+  - name: _preview
+    description: "# Args: `<topic/subtopic>` `[--fix]` `[--verbose]`. v1.0.0. Validate knowledge structure and content integrity with optional automated fixes and detailed reporting"
+    required: false
+version: "1.0.0"
+category: "Knowledge Management"
+icon: "🔍"
+---
 
 Input: $ARGUMENTS (format: topic/subtopic [--fix] [--verbose])
 

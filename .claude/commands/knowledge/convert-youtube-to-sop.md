@@ -1,4 +1,24 @@
-# Args: `<topic/subtopic:block>` `<youtube-url>` `<transcript>` `<statement>`. v2.3.1. Convert YouTube video transcript to SOP documentation in knowledge base.
+---
+description: Convert YouTube video transcript to SOP documentation in knowledge base
+arguments:
+  - name: topic/subtopic:block
+    description: Knowledge base path for SOP storage (format: topic, topic/subtopic, or topic/subtopic:block)
+    required: true
+  - name: youtube-url
+    description: The YouTube video URL (youtube.com/watch?v= or youtu.be/)
+    required: true
+  - name: transcript
+    description: The video transcript text (should include timestamps if available)
+    required: true
+  - name: statement
+    description: User guidance for SOP content and context
+    required: true
+  - name: _preview
+    description: "Convert YouTube video transcript to SOP documentation in knowledge base"
+version: "2.3.1"
+category: "knowledge"
+icon: "📺"
+---
 
 ## Usage
 

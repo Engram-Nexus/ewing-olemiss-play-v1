@@ -1,4 +1,28 @@
-# Args: `<type>` `<description>` `[--output=inline|file]` `[--validate=true|false]` `[--style=default|minimal|detailed]`. v1.0.0. Generate specific Mermaid diagram types with syntax validation and formatting.
+---
+description: "Generate specific Mermaid diagram types with syntax validation and formatting"
+arguments:
+  - name: "type"
+    description: "Mermaid diagram type (flowchart, class, sequence)"
+    required: true
+  - name: "description"
+    description: "Detailed description of what to diagram"
+    required: true
+  - name: "--output"
+    description: "Output format (inline|file)"
+    required: false
+  - name: "--validate"
+    description: "Enable syntax validation (true|false)"
+    required: false
+  - name: "--style"
+    description: "Diagram complexity level (default|minimal|detailed)"
+    required: false
+  - name: "_preview"
+    description: "flowchart \"User login process\" --output=file"
+    required: false
+version: "1.0.0"
+category: "knowledge"
+icon: "📊"
+---
 
 ## Summary
 

@@ -8,6 +8,7 @@ This matrix integrates knowledge from all blocks and subtopics in this ewing-pro
 ## Blocks
 - [📄 case-studies](case-studies.md)
 - [📄 market-validation](market-validation.md)
+- [📄 private-equity](private-equity.md)
 
 ## Integrated Knowledge
 
@@ -28,3 +29,5 @@ Implementation recommendations follow proven patterns: Phase 1 mirrors Year Up's
 Risk mitigation draws from failures: Lambda School's over-promising led to lawsuits (mitigation: conservative projections), coding bootcamp saturation caused consolidations (mitigation: focus on sales vs. coding), and second-chance employer concerns about costs (mitigation: pre-negotiated contracts and success stories).
 
 The opportunity validation is complete: successful programs generate $40-85k participant outcomes, achieve 70-90% placement rates, and create positive employer ROI. The unique combination of voice-first technology, university partnerships, immediate revenue generation, and transformative value for marijuana felons creates a defensible market position. With no single organization successfully integrating all ten Core Principles, Ewing's proposal can capture significant market share by combining proven best practices with voice-first innovation, addressing the $10+ billion opportunity while creating profound social impact.
+
+Private equity analysis reveals multiple strategic investment pathways with 25-35% IRR potential across five distinct use cases: growth capital investment ($15-50M), platform consolidation ($100-250M), social impact investment ($25-75M), technology-first investment ($20-60M), and roll-up strategy ($150-500M). Financial modeling demonstrates sustainable unit economics with LTV/CAC ratios of 15-20x, multi-revenue stream diversification achieving $47M revenue by Year 5, and clear exit pathways through strategic acquisition ($200-400M), financial buyer sale ($150-300M), or IPO potential ($500M-1B). The comprehensive framework addresses all PE considerations including stakeholder alignment, regulatory compliance, operational structure, risk mitigation, and implementation roadmaps with specific timelines and success metrics.

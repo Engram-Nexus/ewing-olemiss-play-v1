@@ -695,19 +695,20 @@
         }
 
         // Custom renderer to add IDs to headings
-        const renderer = new marked.Renderer();
-        const originalHeadingRenderer = renderer.heading;
+        const renderer = {
+            heading(text, level, raw, slugger) {
+                // Extract text content properly
+                const escapedText = text;
+                const plainText = raw || text;
 
-        renderer.heading = function(text, level, raw) {
-            // Ensure we have valid input
-            const rawText = raw || text || '';
-            const slug = slugify(rawText);
+                // Create a slug from the plain text
+                const slug = slugify(plainText);
 
-            // Only add ID if we have a valid slug
-            if (slug) {
-                return `<h${level} id="${slug}">${text}</h${level}>`;
-            } else {
-                return `<h${level}>${text}</h${level}>`;
+                // Return heading with ID
+                if (slug) {
+                    return `<h${level} id="${slug}">${escapedText}</h${level}>\n`;
+                }
+                return `<h${level}>${escapedText}</h${level}>\n`;
             }
         };
 

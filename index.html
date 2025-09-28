@@ -590,6 +590,11 @@
             // Load the main README as the home page
             loadMarkdown('.knowledge/ewing-proposal/README.md');
 
+            // Set URL to just '#' for home
+            if (window.location.hash !== '#' && window.location.hash !== '') {
+                history.replaceState(null, null, '#');
+            }
+
             // Update toggle buttons to show home is active
             document.querySelectorAll('.toggle-btn').forEach(btn => {
                 btn.classList.remove('active');
@@ -714,8 +719,12 @@
                             const targetElement = document.getElementById(targetId);
                             if (targetElement) {
                                 targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                                // Update URL hash - use simple anchor for same-page navigation
-                                history.pushState(null, null, `#${targetId}`);
+                                // Get current clean path for the URL
+                                let currentCleanPath = currentPath.replace('.knowledge/ewing-proposal/', '');
+                                currentCleanPath = currentCleanPath.replace('/README.md', '/');
+                                currentCleanPath = currentCleanPath.replace('.md', '');
+                                // Update URL with clean path and anchor
+                                history.pushState(null, null, `#${currentCleanPath}#${targetId}`);
                             }
                         });
                     }
@@ -750,11 +759,17 @@
                     window.scrollTo(0, 0);
                 }
 
-                // Update URL to reflect current document
+                // Update URL to reflect current document with clean folder paths
                 // Don't update if we're already at the correct URL
                 const currentHash = window.location.hash;
-                const expectedHash = `#${targetPath.replace('.knowledge/', '')}`;
-                if (!currentHash.startsWith(expectedHash)) {
+
+                // Create clean URL for display
+                let cleanPath = targetPath.replace('.knowledge/ewing-proposal/', '');
+                cleanPath = cleanPath.replace('/README.md', '/');
+                cleanPath = cleanPath.replace('.md', '');
+
+                const expectedHash = `#${cleanPath}`;
+                if (currentHash !== expectedHash) {
                     history.replaceState(null, null, expectedHash);
                 }
 
@@ -821,14 +836,26 @@
                 anchor = parts[1];
             } else if (hashContent.startsWith('/')) {
                 filePath = hashContent;
+            } else if (hashContent) {
+                // Handle clean folder paths (e.g., #overview/ or #technology/primary-features/)
+                filePath = '/' + hashContent;
             }
 
             // Convert to proper path if we have a file path
             if (filePath) {
+                // Remove trailing slash if present
+                filePath = filePath.replace(/\/$/, '');
+
+                // If it doesn't end with .md, assume it's a folder and add README.md
+                if (!filePath.endsWith('.md')) {
+                    filePath = filePath + '/README.md';
+                }
+
+                // Add the base knowledge path
                 if (filePath.startsWith('/')) {
-                    filePath = '.knowledge' + filePath;
+                    filePath = '.knowledge/ewing-proposal' + filePath;
                 } else {
-                    filePath = '.knowledge/' + filePath;
+                    filePath = '.knowledge/ewing-proposal/' + filePath;
                 }
             }
 
@@ -849,6 +876,23 @@
         window.addEventListener('DOMContentLoaded', () => {
             // Small delay to ensure all elements are ready
             setTimeout(() => {
+                // Check if we have a pathname that should be converted
+                const pathname = window.location.pathname;
+                const pathParts = pathname.split('/');
+
+                // Look for folder-style URLs after the repo name
+                // e.g., /ewing-olemiss-play-v1/overview/ or /ewing-olemiss-play-v1/technology/primary-features/
+                if (pathParts.length > 2 && pathParts[pathParts.length - 2] !== '') {
+                    // We have a folder path, redirect to hash-based URL
+                    const folderPath = pathParts.slice(2).join('/').replace(/\/$/, '');
+                    if (folderPath) {
+                        // Redirect to hash-based URL
+                        window.location.replace('#' + folderPath + '/');
+                        return;
+                    }
+                }
+
+                // Normal hash-based navigation
                 const hash = window.location.hash;
                 if (hash && hash.startsWith('#')) {
                     const { path, anchor, scrollOnly } = parseUrlHash(hash);

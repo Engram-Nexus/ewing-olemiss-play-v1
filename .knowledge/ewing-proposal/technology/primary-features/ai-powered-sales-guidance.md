@@ -1,5 +1,18 @@
 # AI-Powered Sales Guidance System
 
+## Table of Contents
+- [Overview](#overview)
+- [Technical Requirements](#technical-requirements)
+  - [System Architecture](#system-architecture)
+  - [Software Development](#software-development)
+  - [User Features](#user-features)
+  - [User Experience](#user-experience)
+  - [Performance Requirements](#performance-requirements)
+- [Integration Architecture](#integration-architecture)
+- [Security & Compliance](#security--compliance)
+- [Implementation Phases](#implementation-phases)
+- [Success Metrics](#success-metrics)
+
 ## Overview
 Real-time artificial intelligence system that provides dynamic sales coaching during live calls. The platform analyzes conversations in real-time, generates contextual scripts, handles objections instantly, and learns from successful patterns to continuously improve sales outcomes.
 

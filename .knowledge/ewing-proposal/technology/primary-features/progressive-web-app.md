@@ -1,5 +1,12 @@
 # Progressive Web App
 
+## Table of Contents
+- [Technical Requirements](#technical-requirements)
+  - [PWA Architecture](#pwa-architecture)
+  - [Core Features](#core-features)
+- [Implementation](#implementation)
+- [Success Metrics](#success-metrics)
+
 ## Overview
 Modern web application providing native app experience without installation, featuring offline capabilities, push notifications, and optimal performance across all devices.
 

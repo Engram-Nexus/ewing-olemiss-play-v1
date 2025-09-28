@@ -1,5 +1,18 @@
 # Automated Administrative Layer
 
+## Table of Contents
+- [Overview](#overview)
+- [Technical Requirements](#technical-requirements)
+  - [System Architecture](#system-architecture)
+  - [Software Development](#software-development)
+  - [User Features](#user-features)
+  - [User Experience](#user-experience)
+  - [Performance Requirements](#performance-requirements)
+- [Integration Architecture](#integration-architecture)
+- [Security & Compliance](#security--compliance)
+- [Implementation Phases](#implementation-phases)
+- [Success Metrics](#success-metrics)
+
 ## Overview
 Intelligent automation system that eliminates manual administrative tasks, enabling sales representatives to focus entirely on selling. Handles call routing, CRM updates, calendar management, document generation, and compliance automatically.
 

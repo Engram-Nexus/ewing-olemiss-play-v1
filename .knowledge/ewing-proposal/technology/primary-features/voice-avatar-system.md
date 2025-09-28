@@ -1,5 +1,12 @@
 # Voice Avatar System
 
+## Table of Contents
+- [Technical Requirements](#technical-requirements)
+  - [Avatar Technology](#avatar-technology)
+  - [Avatar Features](#avatar-features)
+- [Implementation](#implementation)
+- [Success Metrics](#success-metrics)
+
 ## Overview
 AI-powered personalized voice assistant providing emotional support, role-play training, and cultural coaching throughout the sales journey.
 

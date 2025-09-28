@@ -1,5 +1,13 @@
 # Accessibility Features
 
+## Table of Contents
+- [Overview](#overview)
+- [Technical Requirements](#technical-requirements)
+  - [Accessibility Standards](#accessibility-standards)
+  - [Key Features](#key-features)
+- [Implementation](#implementation)
+- [Success Metrics](#success-metrics)
+
 ## Overview
 Comprehensive accessibility implementation ensuring platform usability for all users, including those with disabilities, meeting WCAG 2.1 AA standards.
 

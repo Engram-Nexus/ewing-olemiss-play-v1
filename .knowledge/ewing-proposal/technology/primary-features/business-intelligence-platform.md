@@ -1,5 +1,13 @@
 # Business Intelligence Platform
 
+## Table of Contents
+- [Technical Requirements](#technical-requirements)
+  - [System Architecture](#system-architecture)
+  - [Analytics Capabilities](#analytics-capabilities)
+  - [Key Features](#key-features)
+- [Implementation](#implementation)
+- [Success Metrics](#success-metrics)
+
 ## Overview
 Enterprise-grade analytics platform providing real-time insights, predictive analytics, and customizable dashboards for data-driven sales optimization.
 

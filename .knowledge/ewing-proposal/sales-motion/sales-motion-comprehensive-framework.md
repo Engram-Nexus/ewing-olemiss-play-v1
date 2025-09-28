@@ -2,6 +2,27 @@
 
 A comprehensive framework outlining the core principles, values, and daily activities for sales teams operating within Ewing's transformative business model, designed to achieve peak performance while creating meaningful social impact.
 
+## Table of Contents
+
+- [Core Principles and Values for Peak Performance](#core-principles-and-values-for-peak-performance)
+  - [Foundation: Ewing's 10 Core Principles Applied to Sales](#foundation-ewings-10-core-principles-applied-to-sales)
+  - [Essential Values for Sales Representatives](#essential-values-for-sales-representatives)
+- [Daily Activities Framework](#daily-activities-framework)
+  - [Morning Routine (7:00-8:30 AM)](#morning-routine-700-830-am)
+  - [Core Calling Hours (8:30 AM - 5:00 PM)](#core-calling-hours-830-am---500-pm)
+  - [Evening Wrap-up (5:00-6:00 PM)](#evening-wrap-up-500-600-pm)
+- [Performance Management and Development](#performance-management-and-development)
+  - [Binary Metrics System](#binary-metrics-system)
+  - [Skill Progression Model](#skill-progression-model)
+- [Implementation Strategy for Peak Performance](#implementation-strategy-for-peak-performance)
+  - [Zero-Friction Onboarding System](#zero-friction-onboarding-system)
+  - [Mentorship Framework](#mentorship-framework)
+  - [Technology-Enhanced Performance](#technology-enhanced-performance)
+- [Connection to Ewing's Broader Mission](#connection-to-ewings-broader-mission)
+  - [Social Impact Integration](#social-impact-integration)
+  - [University Partnership Model](#university-partnership-model)
+  - [Enterprise Deployment Readiness](#enterprise-deployment-readiness)
+
 ## Core Principles and Values for Peak Performance
 
 ### Foundation: Ewing's 10 Core Principles Applied to Sales

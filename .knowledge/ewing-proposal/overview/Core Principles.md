@@ -1,5 +1,24 @@
 # Core Principles
 
+## Table of Contents
+- [The Fundamental Belief](#the-fundamental-belief)
+- [Business Success Principles](#business-success-principles)
+  - [1. Voice-First as Competitive Advantage](#1-voice-first-as-competitive-advantage)
+  - [2. Binary Metrics Drive Results](#2-binary-metrics-drive-results)
+  - [3. Friction Elimination as Strategy](#3-friction-elimination-as-strategy)
+  - [4. Network Effects Through Relationships](#4-network-effects-through-relationships)
+  - [5. Mission-Based Teams Outperform](#5-mission-based-teams-outperform)
+  - [6. Revenue From Day One](#6-revenue-from-day-one)
+  - [7. Intuition Beats Analysis](#7-intuition-beats-analysis)
+  - [8. Own the Core, Partner Everything Else](#8-own-the-core-partner-everything-else)
+  - [9. Scale Through Replication, Not Customization](#9-scale-through-replication-not-customization)
+  - [10. Transformative Value or Nothing](#10-transformative-value-or-nothing)
+- [The Execution Framework](#the-execution-framework)
+  - [Immediate Priorities](#immediate-priorities)
+  - [Success Metrics](#success-metrics)
+  - [Scaling Strategy](#scaling-strategy)
+- [The Business Philosophy](#the-business-philosophy)
+
 ## The Fundamental Belief
 
 Success emerges from the convergence of radical simplicity, relentless focus on execution, and the elimination of every barrier between talent and opportunity. By designing systems that make complexity invisible and success measurable, we create platforms where anyone—regardless of background—can generate immediate economic value through their own effort.

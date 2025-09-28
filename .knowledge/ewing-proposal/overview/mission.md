@@ -1,5 +1,26 @@
 # Mission
 
+## Table of Contents
+- [The Personal Mission](#the-personal-mission)
+- [The Social Mission](#the-social-mission)
+- [Core Values](#core-values)
+  - [1. Economic Justice Through Opportunity](#1-economic-justice-through-opportunity)
+  - [2. Technology as Liberation](#2-technology-as-liberation)
+  - [3. Dignity Through Achievement](#3-dignity-through-achievement)
+  - [4. Transformative Impact Over Incremental Change](#4-transformative-impact-over-incremental-change)
+  - [5. Personal Accountability for Systemic Change](#5-personal-accountability-for-systemic-change)
+  - [6. Education as Immediate Empowerment](#6-education-as-immediate-empowerment)
+  - [7. Network Multiplication](#7-network-multiplication)
+  - [8. Proof Through Execution](#8-proof-through-execution)
+  - [9. Ownership of Outcomes](#9-ownership-of-outcomes)
+  - [10. Legacy Through Lives Transformed](#10-legacy-through-lives-transformed)
+- [The Implementation Path](#the-implementation-path)
+  - [Phase 1: Ole Miss Validation (Summer 2025)](#phase-1-ole-miss-validation-summer-2025)
+  - [Phase 2: Population Integration](#phase-2-population-integration)
+  - [Phase 3: Systemic Scale](#phase-3-systemic-scale)
+- [The Ultimate Vision](#the-ultimate-vision)
+- [The Moral Imperative](#the-moral-imperative)
+
 ## The Personal Mission
 
 "That's all I'm trying to do. It's what I'm going to do for the rest of my life."

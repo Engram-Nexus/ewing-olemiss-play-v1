@@ -1,5 +1,31 @@
 # Case Studies: Entities Operating Like Ewing's Proposal
 
+## Table of Contents
+- [Executive Summary](#executive-summary)
+- [Comprehensive Case Analysis](#comprehensive-case-analysis)
+  - [Year Up: The University-Industry Pioneer](#year-up-the-university-industry-pioneer)
+  - [Pursuit Fellowship: The High-Value Tech Training Model](#pursuit-fellowship-the-high-value-tech-training-model)
+  - [Salesforce Trailhead: The Democratized Learning Platform](#salesforce-trailhead-the-democratized-learning-platform)
+  - [Catalyte: The AI-Driven Hidden Talent Model](#catalyte-the-ai-driven-hidden-talent-model)
+  - [Genesys Works: The High School to Corporate Pipeline](#genesys-works-the-high-school-to-corporate-pipeline)
+  - [The Last Mile: The Prison-to-Tech Pipeline](#the-last-mile-the-prison-to-tech-pipeline)
+  - [Dave's Killer Bread: The Second-Chance Employment Leader](#daves-killer-bread-the-second-chance-employment-leader)
+- [Comparative Analysis Against Core Principles](#comparative-analysis-against-core-principles)
+- [Critical Success Factors Across All Models](#critical-success-factors-across-all-models)
+  - [1. Direct Employer Funding](#1-direct-employer-funding)
+  - [2. Measurable ROI for Employers](#2-measurable-roi-for-employers)
+  - [3. Elimination of Traditional Requirements](#3-elimination-of-traditional-requirements)
+  - [4. Staged Learning and Earning](#4-staged-learning-and-earning)
+  - [5. Wraparound Support Services](#5-wraparound-support-services)
+- [Unique Differentiation Opportunities](#unique-differentiation-opportunities)
+- [Risk Factors and Mitigation Strategies](#risk-factors-and-mitigation-strategies)
+  - [Identified Risks from Failed/Struggling Models](#identified-risks-from-failedstruggling-models)
+- [Recommendations for Implementation](#recommendations-for-implementation)
+  - [Phase 1: Proof of Concept (Ole Miss)](#phase-1-proof-of-concept-ole-miss)
+  - [Phase 2: Scale and Systemize](#phase-2-scale-and-systemize)
+  - [Phase 3: Population Integration](#phase-3-population-integration)
+- [Conclusion](#conclusion)
+
 ## Executive Summary
 
 Multiple organizations have successfully implemented elements of Ewing's vision, though none have fully integrated all ten Core Principles. The most successful models—Year Up ($85M annual revenue), Pursuit Fellowship (85% placement at $85k average), and Catalyte (100% placement through AI-driven talent identification)—demonstrate that combining immediate revenue generation, simplified technology, and focus on underserved populations can create transformative outcomes. These case studies validate both the market opportunity and operational approach while revealing critical success factors and potential pitfalls.

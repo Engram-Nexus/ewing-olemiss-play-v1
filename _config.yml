@@ -1,0 +1,39 @@
+# GitHub Pages Configuration
+title: Ewing Ole Miss Play - Knowledge Base
+description: Voice-First Sales Enablement Platform Documentation
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "https://engram-nexus.github.io/ewing-olemiss-play-v1" # the base hostname & protocol
+
+# Build settings
+theme: null # We're using a custom index.html
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+
+# Include/Exclude
+include:
+  - .knowledge
+  - index.html
+  - _config.yml
+
+exclude:
+  - .git
+  - .gitignore
+  - node_modules
+  - vendor
+  - .claude
+  - .vscode
+  - .idea
+
+# GitHub Pages
+github:
+  repository: Engram-Nexus/ewing-olemiss-play-v1
+  branch: main
+
+# Defaults
+defaults:
+  - scope:
+      path: ".knowledge"
+    values:
+      layout: null

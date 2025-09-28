@@ -674,20 +674,32 @@
                     // Handle internal knowledge base links
                     let absolutePath = linkPath;
 
-                    // Handle relative paths
-                    if (!linkPath.startsWith('/') && !linkPath.startsWith('.knowledge/')) {
-                        // This is a relative path from current document
-                        const currentDir = targetPath.substring(0, targetPath.lastIndexOf('/'));
-                        absolutePath = `${currentDir}/${linkPath}`;
+                    // Handle different path types
+                    if (linkPath.startsWith('.knowledge/')) {
+                        // Already has full path
+                        absolutePath = linkPath;
+                    } else if (linkPath.startsWith('ewing-proposal/')) {
+                        // Path starts with ewing-proposal, just add .knowledge/
+                        absolutePath = `.knowledge/${linkPath}`;
                     } else if (linkPath.startsWith('/')) {
                         // Absolute path from knowledge base root
                         absolutePath = `.knowledge/ewing-proposal${linkPath}`;
-                    } else if (linkPath.startsWith('.knowledge/')) {
-                        // Already has full path
-                        absolutePath = linkPath;
-                    } else if (linkPath.startsWith('ewing-proposal/') || linkPath.match(/^[\w-]+\//)) {
-                        // Path from ewing-proposal root
-                        absolutePath = `.knowledge/${linkPath}`;
+                    } else {
+                        // Relative path from current document
+                        const currentDir = targetPath.substring(0, targetPath.lastIndexOf('/'));
+
+                        // Check if the relative path might be from the root
+                        // Common folder names in the knowledge base
+                        const rootFolders = ['overview', 'technology', 'opportunity', 'sales-motion'];
+                        const firstPart = linkPath.split('/')[0];
+
+                        if (rootFolders.includes(firstPart)) {
+                            // This is likely a path from the ewing-proposal root
+                            absolutePath = `.knowledge/ewing-proposal/${linkPath}`;
+                        } else {
+                            // True relative path from current directory
+                            absolutePath = `${currentDir}/${linkPath}`;
+                        }
                     }
 
                     // Handle different link types
@@ -700,25 +712,26 @@
                         anchor = parts[1];
                     }
 
-                    // If path doesn't have an extension and doesn't end with /, check if it's a directory
-                    // and add README.md if so, otherwise add .md extension
+                    // If path doesn't have an extension, add .md or README.md as appropriate
                     if (!absolutePath.endsWith('.md')) {
-                        // Check if this looks like a directory (ends with / or has subdirectories)
                         if (absolutePath.endsWith('/')) {
+                            // Directory path - add README.md
                             absolutePath = absolutePath + 'README.md';
-                        } else if (absolutePath.includes('/') && !absolutePath.includes('.')) {
-                            // Could be either a directory or a file without extension
-                            // For knowledge base, assume directories if no extension
+                        } else {
+                            // Check if this might be a directory based on known structure
+                            const knownDirs = [
+                                'overview', 'technology', 'opportunity', 'sales-motion',
+                                'primary-features', 'blocks', 'subtopics'
+                            ];
                             const lastPart = absolutePath.split('/').pop();
-                            if (lastPart && lastPart.toLowerCase() !== lastPart.toUpperCase()) {
-                                // Has mixed case or lowercase, likely a file
-                                absolutePath = absolutePath + '.md';
+
+                            // If last part is a known directory name, treat as directory
+                            if (knownDirs.includes(lastPart)) {
+                                absolutePath = absolutePath + '/README.md';
                             } else {
-                                // All lowercase or special naming, check common patterns
+                                // Assume it's a file and add .md
                                 absolutePath = absolutePath + '.md';
                             }
-                        } else {
-                            absolutePath = absolutePath + '.md';
                         }
                     }
 

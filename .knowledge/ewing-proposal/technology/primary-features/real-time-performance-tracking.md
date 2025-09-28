@@ -8,10 +8,24 @@ Comprehensive performance monitoring system providing instant feedback on sales 
 ### System Architecture
 
 **Real-Time Analytics Pipeline**
-```
-Event Stream (Kafka) → Stream Processing (Apache Flink) →
-Time-Series DB (InfluxDB) → Analytics Engine (ClickHouse) →
-WebSocket Distribution → Dashboard Updates → Mobile Push Notifications
+
+```mermaid
+graph LR
+    A[Event Stream<br/>Kafka] --> B[Stream Processing<br/>Apache Flink]
+    B --> C[Time-Series DB<br/>InfluxDB]
+    B --> D[Analytics Engine<br/>ClickHouse]
+    C --> E[WebSocket<br/>Distribution]
+    D --> E
+    E --> F[Dashboard<br/>Updates]
+    E --> G[Mobile Push<br/>Notifications]
+
+    style A fill:#e1f5fe
+    style B fill:#fff3e0
+    style C fill:#f3e5f5
+    style D fill:#e8f5e9
+    style E fill:#fce4ec
+    style F fill:#c5e1a5
+    style G fill:#d1c4e9
 ```
 
 **Infrastructure Components**
@@ -23,16 +37,50 @@ WebSocket Distribution → Dashboard Updates → Mobile Push Notifications
 
 ### Software Development
 
-**Performance Metrics Engine**
-```python
-class PerformanceTracker:
-    def __init__(self):
-        self.kafka_producer = KafkaProducer(bootstrap_servers='kafka:9092')
-        self.redis_client = Redis(host='redis', decode_responses=True)
-        self.metrics_db = InfluxDBClient(host='influxdb')
+**Performance Metrics Architecture**
 
-    async def track_event(self, event_type, user_id, metadata):
-        # Stream to Kafka for processing
+```mermaid
+flowchart TB
+    subgraph Events
+        E1[Call Started]
+        E2[Call Ended]
+        E3[Sale Closed]
+        E4[Appointment Set]
+    end
+
+    subgraph Processing
+        P1[Event Aggregation]
+        P2[Score Calculation]
+        P3[Rank Update]
+        P4[Achievement Check]
+    end
+
+    subgraph Storage
+        S1[Redis Leaderboard]
+        S2[InfluxDB Metrics]
+        S3[ClickHouse Analytics]
+    end
+
+    subgraph Display
+        D1[Live Dashboard]
+        D2[Mobile App]
+        D3[TV Display]
+    end
+
+    Events --> Processing
+    Processing --> Storage
+    Storage --> Display
+```
+
+**Performance Metrics Table**
+
+| Metric Type | Storage | Update Frequency | Query Performance | Use Case |
+|-------------|---------|-----------------|-------------------|----------|
+| Leaderboard Rankings | Redis Sorted Sets | Real-time | <10ms | Live competition |
+| Call Metrics | InfluxDB | Every second | <50ms | Time-series analysis |
+| Earnings Data | PostgreSQL | On transaction | <100ms | Commission tracking |
+| Analytics | ClickHouse | Batch (5 min) | <500ms | Complex queries |
+| Achievements | Redis + PostgreSQL | On event | <25ms | Gamification |
         event = {
             'timestamp': datetime.utcnow().isoformat(),
             'user_id': user_id,

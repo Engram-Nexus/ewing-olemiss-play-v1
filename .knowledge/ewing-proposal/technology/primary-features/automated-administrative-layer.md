@@ -8,10 +8,27 @@ Intelligent automation system that eliminates manual administrative tasks, enabl
 ### System Architecture
 
 **Workflow Orchestration Pipeline**
-```
-Event Trigger → Workflow Engine (Temporal) → Task Queue →
-Service Integration → Action Execution → Result Validation →
-CRM Update → Notification → Audit Log
+
+```mermaid
+graph TB
+    A[Event Trigger] --> B[Workflow Engine<br/>Temporal]
+    B --> C[Task Queue<br/>RabbitMQ]
+    C --> D{Service Integration}
+    D --> E[CRM Update]
+    D --> F[Calendar Sync]
+    D --> G[Document Gen]
+    D --> H[Email Send]
+    E --> I[Result Validation]
+    F --> I
+    G --> I
+    H --> I
+    I --> J[Notification]
+    I --> K[Audit Log]
+
+    style A fill:#e3f2fd
+    style B fill:#fff3e0
+    style D fill:#ffecb3
+    style I fill:#c8e6c9
 ```
 
 **Core Infrastructure**

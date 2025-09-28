@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wireframe: Dashboard</title>
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            line-height: 1.5;
+            color: #333;
+            background: #f5f5f5;
+        }
+        
+        /* Layout utilities */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .flex { display: flex; }
+        .grid { display: grid; }
+        .flex-1 { flex: 1; }
+        .gap-4 { gap: 16px; }
+        .gap-6 { gap: 24px; }
+        .mb-4 { margin-bottom: 16px; }
+        .mb-6 { margin-bottom: 24px; }
+        
+        /* Component blocks */
+        .header {
+            height: 60px;
+            background: #ddd;
+            border-bottom: 2px solid #999;
+            display: flex;
+            align-items: center;
+        }
+        
+        .sidebar {
+            width: 250px;
+            background: #eee;
+            min-height: calc(100vh - 60px);
+            padding: 20px;
+            border-right: 1px solid #ccc;
+        }
+        
+        .main-content {
+            flex: 1;
+            padding: 24px;
+            background: #fff;
+            min-height: calc(100vh - 60px);
+        }
+        
+        .card {
+            background: #fff;
+            border: 2px solid #ddd;
+            padding: 20px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+        
+        .placeholder {
+            background: #e5e5e5;
+            border: 1px dashed #999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-size: 14px;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+        
+        .button {
+            background: #ccc;
+            border: 2px solid #999;
+            padding: 10px 20px;
+            cursor: pointer;
+            text-decoration: none;
+            color: #333;
+            display: inline-block;
+            font-weight: 500;
+            text-align: center;
+        }
+        
+        .button:hover {
+            background: #bbb;
+        }
+        
+        .button.primary {
+            background: #999;
+            color: #fff;
+        }
+        
+        /* Navigation */
+        .nav-item {
+            display: block;
+            padding: 10px 16px;
+            margin-bottom: 4px;
+            background: #f5f5f5;
+            text-decoration: none;
+            color: #333;
+            border: 1px solid transparent;
+        }
+        
+        .nav-item:hover {
+            background: #e5e5e5;
+        }
+        
+        .nav-item.active {
+            background: #999;
+            color: #fff;
+        }
+        
+        /* Stats grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 32px;
+        }
+        
+        .stat-card {
+            background: #f9f9f9;
+            border: 2px solid #ddd;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        /* Table */
+        .table-container {
+            border: 2px solid #ddd;
+            background: #fff;
+            overflow: hidden;
+        }
+        
+        .table-header {
+            background: #eee;
+            padding: 16px 20px;
+            border-bottom: 2px solid #ddd;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .table-row {
+            padding: 16px 20px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        
+        .table-row:hover {
+            background: #f9f9f9;
+        }
+        
+        /* Form elements */
+        .input {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ddd;
+            background: #fff;
+            font-family: inherit;
+        }
+        
+        .select {
+            padding: 10px;
+            border: 2px solid #ddd;
+            background: #fff;
+            font-family: inherit;
+        }
+        
+        /* Screen navigation */
+        .screen-nav {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #fff;
+            padding: 16px;
+            border: 3px solid #999;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+        
+        .screen-nav h4 {
+            margin-bottom: 8px;
+            font-size: 14px;
+            text-transform: uppercase;
+            color: #666;
+        }
+        
+        .screen-nav ul {
+            list-style: none;
+        }
+        
+        .screen-nav li {
+            margin-bottom: 4px;
+        }
+        
+        .screen-nav a {
+            color: #333;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        
+        .screen-nav a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .sidebar {
+                display: none;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .screen-nav {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Screen Navigation -->
+    <div class="screen-nav">
+        <h4>Wireframe Screens:</h4>
+        <ul>
+            <li><a href="wireframe-dashboard.html">→ Dashboard</a></li>
+            <li><a href="wireframe-drawer-open.html">Dashboard (Drawer)</a></li>
+            <li><a href="wireframe-detail.html">Detail View</a></li>
+            <li><a href="wireframe-modal.html">Modal State</a></li>
+            <li><a href="wireframe-mobile.html">Mobile View</a></li>
+        </ul>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container flex" style="width: 100%;">
+            <div class="placeholder" style="width: 150px; height: 40px;">Logo</div>
+            <div class="flex-1"></div>
+            <div class="flex gap-4">
+                <button class="button">Search</button>
+                <button class="button">Notifications</button>
+                <div class="placeholder" style="width: 40px; height: 40px; border-radius: 50%;">User</div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Layout -->
+    <div class="flex">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="mb-6">
+                <div class="placeholder mb-4" style="height: 30px;">Menu Title</div>
+                <nav>
+                    <a href="#" class="nav-item active">Dashboard</a>
+                    <a href="#" class="nav-item">Analytics</a>
+                    <a href="#" class="nav-item">Projects</a>
+                    <a href="#" class="nav-item">Team</a>
+                    <a href="#" class="nav-item">Reports</a>
+                </nav>
+            </div>
+            
+            <div class="mb-6">
+                <div class="placeholder mb-4" style="height: 20px;">Secondary Menu</div>
+                <nav>
+                    <a href="#" class="nav-item">Settings</a>
+                    <a href="#" class="nav-item">Help</a>
+                    <a href="#" class="nav-item">Logout</a>
+                </nav>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Page Title -->
+            <div class="mb-6">
+                <h1 style="font-size: 28px; font-weight: 600; margin-bottom: 8px;">Dashboard</h1>
+                <p style="color: #666;">Welcome back, here's your overview</p>
+            </div>
+
+            <!-- Stats Grid -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="placeholder mb-4" style="height: 60px;">Chart Icon</div>
+                    <div style="font-size: 24px; font-weight: 600; margin-bottom: 4px;">1,234</div>
+                    <div style="color: #666; font-size: 14px;">Total Items</div>
+                </div>
+                <div class="stat-card">
+                    <div class="placeholder mb-4" style="height: 60px;">Graph Icon</div>
+                    <div style="font-size: 24px; font-weight: 600; margin-bottom: 4px;">+23%</div>
+                    <div style="color: #666; font-size: 14px;">Growth Rate</div>
+                </div>
+                <div class="stat-card">
+                    <div class="placeholder mb-4" style="height: 60px;">Users Icon</div>
+                    <div style="font-size: 24px; font-weight: 600; margin-bottom: 4px;">456</div>
+                    <div style="color: #666; font-size: 14px;">Active Users</div>
+                </div>
+                <div class="stat-card">
+                    <div class="placeholder mb-4" style="height: 60px;">Revenue Icon</div>
+                    <div style="font-size: 24px; font-weight: 600; margin-bottom: 4px;">$12.3k</div>
+                    <div style="color: #666; font-size: 14px;">Revenue</div>
+                </div>
+            </div>
+
+            <!-- Charts Section -->
+            <div class="grid gap-6" style="grid-template-columns: 2fr 1fr; margin-bottom: 32px;">
+                <div class="card">
+                    <h3 style="margin-bottom: 16px;">Activity Chart</h3>
+                    <div class="placeholder" style="height: 300px;">Line Chart</div>
+                </div>
+                <div class="card">
+                    <h3 style="margin-bottom: 16px;">Distribution</h3>
+                    <div class="placeholder" style="height: 300px;">Pie Chart</div>
+                </div>
+            </div>
+
+            <!-- Table Section -->
+            <div class="table-container">
+                <div class="table-header">
+                    <h3>Recent Activity</h3>
+                    <div class="flex gap-4">
+                        <select class="select">
+                            <option>All Types</option>
+                            <option>Type 1</option>
+                            <option>Type 2</option>
+                        </select>
+                        <button class="button primary">Export</button>
+                    </div>
+                </div>
+                
+                <!-- Table rows -->
+                <div class="table-row">
+                    <div class="placeholder" style="width: 40px; height: 40px; border-radius: 4px;">Icon</div>
+                    <div class="flex-1">
+                        <div style="font-weight: 500;">Item Title Goes Here</div>
+                        <div style="font-size: 14px; color: #666;">Subtitle or description</div>
+                    </div>
+                    <div style="color: #666; font-size: 14px;">2 hours ago</div>
+                    <button class="button">Action</button>
+                </div>
+                
+                <div class="table-row">
+                    <div class="placeholder" style="width: 40px; height: 40px; border-radius: 4px;">Icon</div>
+                    <div class="flex-1">
+                        <div style="font-weight: 500;">Another Item Title</div>
+                        <div style="font-size: 14px; color: #666;">Additional information</div>
+                    </div>
+                    <div style="color: #666; font-size: 14px;">5 hours ago</div>
+                    <button class="button">Action</button>
+                </div>
+                
+                <div class="table-row">
+                    <div class="placeholder" style="width: 40px; height: 40px; border-radius: 4px;">Icon</div>
+                    <div class="flex-1">
+                        <div style="font-weight: 500;">Third Item Example</div>
+                        <div style="font-size: 14px; color: #666;">More details here</div>
+                    </div>
+                    <div style="color: #666; font-size: 14px;">1 day ago</div>
+                    <button class="button">Action</button>
+                </div>
+                
+                <div class="table-row">
+                    <div class="placeholder" style="width: 40px; height: 40px; border-radius: 4px;">Icon</div>
+                    <div class="flex-1">
+                        <div style="font-weight: 500;">Fourth Item in List</div>
+                        <div style="font-size: 14px; color: #666;">Description text</div>
+                    </div>
+                    <div style="color: #666; font-size: 14px;">2 days ago</div>
+                    <button class="button">Action</button>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

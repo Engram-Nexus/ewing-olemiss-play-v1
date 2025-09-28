@@ -1,0 +1,80 @@
+<svg width="1000" height="350" xmlns="http://www.w3.org/2000/svg">
+  <!-- Dashboard Storyboard Example -->
+  <defs>
+    <style>
+      .storyboard-bg { fill: #f8f9fa; }
+      .screen-frame { fill: #ffffff; stroke: #6c757d; stroke-width: 2; }
+      .screen-label { font-family: system-ui, sans-serif; font-size: 14px; fill: #212529; font-weight: bold; }
+      .nav-area { fill: #343a40; }
+      .content-area { fill: #f1f3f4; stroke: #ced4da; }
+      .widget { fill: #ffffff; stroke: #dee2e6; stroke-width: 1; }
+      .active-nav { fill: #0d6efd; }
+    </style>
+  </defs>
+  
+  <!-- Background -->
+  <rect class="storyboard-bg" x="0" y="0" width="1000" height="350"/>
+  
+  <!-- Title -->
+  <text class="screen-label" x="500" y="25" text-anchor="middle" font-size="16">Dashboard Application Navigation States</text>
+  
+  <!-- Screen 1: Main Dashboard -->
+  <g transform="translate(50, 50)">
+    <rect class="screen-frame" x="0" y="0" width="220" height="260" rx="8"/>
+    <text class="screen-label" x="110" y="-10" text-anchor="middle">Dashboard</text>
+    <!-- Sidebar -->
+    <rect class="nav-area" x="0" y="0" width="60" height="260" rx="8 0 0 8"/>
+    <rect class="active-nav" x="10" y="20" width="40" height="35" rx="4"/>
+    <rect fill="#6c757d" x="10" y="65" width="40" height="35" rx="4"/>
+    <rect fill="#6c757d" x="10" y="110" width="40" height="35" rx="4"/>
+    <!-- Content Area -->
+    <rect class="content-area" x="60" y="0" width="160" height="260"/>
+    <!-- Widgets -->
+    <rect class="widget" x="70" y="10" width="70" height="60" rx="4"/>
+    <rect class="widget" x="145" y="10" width="65" height="60" rx="4"/>
+    <rect class="widget" x="70" y="80" width="140" height="80" rx="4"/>
+    <rect class="widget" x="70" y="170" width="140" height="80" rx="4"/>
+  </g>
+  
+  <!-- Screen 2: Analytics -->
+  <g transform="translate(320, 50)">
+    <rect class="screen-frame" x="0" y="0" width="220" height="260" rx="8"/>
+    <text class="screen-label" x="110" y="-10" text-anchor="middle">Analytics</text>
+    <!-- Sidebar -->
+    <rect class="nav-area" x="0" y="0" width="60" height="260" rx="8 0 0 8"/>
+    <rect fill="#6c757d" x="10" y="20" width="40" height="35" rx="4"/>
+    <rect class="active-nav" x="10" y="65" width="40" height="35" rx="4"/>
+    <rect fill="#6c757d" x="10" y="110" width="40" height="35" rx="4"/>
+    <!-- Content Area -->
+    <rect class="content-area" x="60" y="0" width="160" height="260"/>
+    <!-- Charts -->
+    <rect class="widget" x="70" y="10" width="140" height="100" rx="4"/>
+    <rect class="widget" x="70" y="120" width="65" height="60" rx="4"/>
+    <rect class="widget" x="145" y="120" width="65" height="60" rx="4"/>
+    <rect class="widget" x="70" y="190" width="140" height="60" rx="4"/>
+  </g>
+  
+  <!-- Screen 3: Settings -->
+  <g transform="translate(590, 50)">
+    <rect class="screen-frame" x="0" y="0" width="220" height="260" rx="8"/>
+    <text class="screen-label" x="110" y="-10" text-anchor="middle">Settings</text>
+    <!-- Sidebar -->
+    <rect class="nav-area" x="0" y="0" width="60" height="260" rx="8 0 0 8"/>
+    <rect fill="#6c757d" x="10" y="20" width="40" height="35" rx="4"/>
+    <rect fill="#6c757d" x="10" y="65" width="40" height="35" rx="4"/>
+    <rect class="active-nav" x="10" y="110" width="40" height="35" rx="4"/>
+    <!-- Content Area -->
+    <rect class="content-area" x="60" y="0" width="160" height="260"/>
+    <!-- Settings Form -->
+    <rect class="widget" x="70" y="10" width="140" height="40" rx="4"/>
+    <rect class="widget" x="70" y="60" width="140" height="40" rx="4"/>
+    <rect class="widget" x="70" y="110" width="140" height="40" rx="4"/>
+    <rect class="widget" x="70" y="160" width="140" height="40" rx="4"/>
+    <rect x="70" y="215" width="65" height="30" rx="4" fill="#0d6efd"/>
+    <text x="102" y="235" text-anchor="middle" fill="white" font-size="12">Save</text>
+  </g>
+  
+  <!-- Navigation flow indicators -->
+  <text x="275" y="180" text-anchor="middle" font-size="20" fill="#6c757d">→</text>
+  <text x="545" y="180" text-anchor="middle" font-size="20" fill="#6c757d">→</text>
+</svg>

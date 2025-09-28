@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wireframe: Modal Dialog State</title>
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            line-height: 1.5;
+            color: #333;
+            background: #f5f5f5;
+        }
+        
+        /* Modal overlay */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+        
+        /* Modal dialog */
+        .modal {
+            background: #fff;
+            border: 3px solid #999;
+            width: 90%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+        
+        .modal-header {
+            padding: 20px 24px;
+            border-bottom: 2px solid #ddd;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-body {
+            padding: 24px;
+        }
+        
+        .modal-footer {
+            padding: 20px 24px;
+            border-top: 2px solid #ddd;
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+            background: #f9f9f9;
+        }
+        
+        /* Form elements */
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #333;
+        }
+        
+        .input {
+            width: 100%;
+            padding: 10px 12px;
+            border: 2px solid #ddd;
+            background: #fff;
+            font-family: inherit;
+            font-size: 16px;
+        }
+        
+        .textarea {
+            width: 100%;
+            padding: 10px 12px;
+            border: 2px solid #ddd;
+            background: #fff;
+            font-family: inherit;
+            font-size: 16px;
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        .select {
+            width: 100%;
+            padding: 10px 12px;
+            border: 2px solid #ddd;
+            background: #fff;
+            font-family: inherit;
+            font-size: 16px;
+        }
+        
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .checkbox {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #999;
+        }
+        
+        /* Utilities */
+        .placeholder {
+            background: #e5e5e5;
+            border: 1px dashed #999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-size: 14px;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+        
+        .button {
+            background: #ccc;
+            border: 2px solid #999;
+            padding: 10px 20px;
+            cursor: pointer;
+            text-decoration: none;
+            color: #333;
+            display: inline-block;
+            font-weight: 500;
+            text-align: center;
+            min-width: 80px;
+        }
+        
+        .button:hover {
+            background: #bbb;
+        }
+        
+        .button.primary {
+            background: #999;
+            color: #fff;
+        }
+        
+        .button.danger {
+            background: #fff;
+            border-color: #666;
+            color: #666;
+        }
+        
+        .button.text-only {
+            background: transparent;
+            border: none;
+            padding: 10px;
+            color: #666;
+            text-decoration: underline;
+        }
+        
+        /* Background content (dimmed) */
+        .page-content {
+            opacity: 0.2;
+            pointer-events: none;
+        }
+        
+        .header {
+            height: 60px;
+            background: #ddd;
+            border-bottom: 2px solid #999;
+            display: flex;
+            align-items: center;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Screen navigation */
+        .screen-nav {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #fff;
+            padding: 16px;
+            border: 3px solid #999;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            z-index: 1001;
+        }
+        
+        .screen-nav h4 {
+            margin-bottom: 8px;
+            font-size: 14px;
+            text-transform: uppercase;
+            color: #666;
+        }
+        
+        .screen-nav ul {
+            list-style: none;
+        }
+        
+        .screen-nav li {
+            margin-bottom: 4px;
+        }
+        
+        .screen-nav a {
+            color: #333;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        
+        .screen-nav a:hover {
+            text-decoration: underline;
+        }
+        
+        /* State indicator */
+        .state-indicator {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #333;
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 4px;
+            font-weight: 600;
+            z-index: 1002;
+        }
+        
+        /* Help text */
+        .help-text {
+            font-size: 14px;
+            color: #666;
+            margin-top: 4px;
+        }
+    </style>
+</head>
+<body>
+    <!-- State Indicator -->
+    <div class="state-indicator">
+        STATE: Modal Dialog Open
+    </div>
+
+    <!-- Screen Navigation -->
+    <div class="screen-nav">
+        <h4>Wireframe Screens:</h4>
+        <ul>
+            <li><a href="wireframe-dashboard.html">Dashboard</a></li>
+            <li><a href="wireframe-drawer-open.html">Dashboard (Drawer)</a></li>
+            <li><a href="wireframe-detail.html">Detail View</a></li>
+            <li><a href="wireframe-modal.html">→ Modal State</a></li>
+            <li><a href="wireframe-mobile.html">Mobile View</a></li>
+        </ul>
+    </div>
+
+    <!-- Background page content (dimmed) -->
+    <div class="page-content">
+        <header class="header">
+            <div class="container" style="width: 100%; display: flex; align-items: center;">
+                <div class="placeholder" style="width: 150px; height: 40px;">Logo</div>
+            </div>
+        </header>
+        <div class="container">
+            <h1 style="margin: 20px 0;">Page Title</h1>
+            <div style="display: grid; gap: 20px; grid-template-columns: repeat(3, 1fr);">
+                <div class="placeholder" style="height: 200px;">Content Block</div>
+                <div class="placeholder" style="height: 200px;">Content Block</div>
+                <div class="placeholder" style="height: 200px;">Content Block</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Overlay -->
+    <div class="modal-overlay">
+        <!-- Modal Dialog -->
+        <div class="modal">
+            <div class="modal-header">
+                <h2 style="font-size: 20px; font-weight: 600;">Create New Item</h2>
+                <button class="button" style="padding: 8px 12px; min-width: auto;">✕</button>
+            </div>
+            
+            <div class="modal-body">
+                <form>
+                    <!-- Text Input -->
+                    <div class="form-group">
+                        <label class="label">Item Name *</label>
+                        <input type="text" class="input" placeholder="Enter item name">
+                        <div class="help-text">Choose a descriptive name</div>
+                    </div>
+                    
+                    <!-- Select Dropdown -->
+                    <div class="form-group">
+                        <label class="label">Category *</label>
+                        <select class="select">
+                            <option>Select a category</option>
+                            <option>Category 1</option>
+                            <option>Category 2</option>
+                            <option>Category 3</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Textarea -->
+                    <div class="form-group">
+                        <label class="label">Description</label>
+                        <textarea class="textarea" placeholder="Enter description (optional)"></textarea>
+                    </div>
+                    
+                    <!-- Radio Buttons -->
+                    <div class="form-group">
+                        <label class="label">Priority Level</label>
+                        <div style="display: flex; flex-direction: column; gap: 8px;">
+                            <label class="checkbox-group">
+                                <input type="radio" name="priority" class="checkbox">
+                                <span>High Priority</span>
+                            </label>
+                            <label class="checkbox-group">
+                                <input type="radio" name="priority" class="checkbox" checked>
+                                <span>Normal Priority</span>
+                            </label>
+                            <label class="checkbox-group">
+                                <input type="radio" name="priority" class="checkbox">
+                                <span>Low Priority</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <!-- Checkbox -->
+                    <div class="form-group">
+                        <label class="checkbox-group">
+                            <input type="checkbox" class="checkbox">
+                            <span>Send email notification when complete</span>
+                        </label>
+                    </div>
+                    
+                    <!-- File Upload -->
+                    <div class="form-group">
+                        <label class="label">Attachments</label>
+                        <div class="placeholder" style="height: 80px; border: 2px dashed #999;">
+                            Drag files here or click to browse
+                        </div>
+                    </div>
+                </form>
+            </div>
+            
+            <div class="modal-footer">
+                <button class="button text-only">Cancel</button>
+                <button class="button">Save as Draft</button>
+                <button class="button primary">Create Item</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

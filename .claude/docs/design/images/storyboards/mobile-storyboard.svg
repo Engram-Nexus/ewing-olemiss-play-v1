@@ -1,0 +1,71 @@
+<svg width="800" height="400" xmlns="http://www.w3.org/2000/svg">
+  <!-- Mobile App Storyboard Example -->
+  <defs>
+    <style>
+      .storyboard-bg { fill: #2d3748; }
+      .mobile-frame { fill: #ffffff; stroke: #4a5568; stroke-width: 3; rx: 10; }
+      .screen-label { font-family: system-ui, sans-serif; font-size: 12px; fill: #ffffff; font-weight: bold; }
+      .header-area { fill: #e9ecef; stroke: #adb5bd; }
+      .tab-area { fill: #f1f3f4; stroke: #ced4da; }
+      .content-area { fill: #f8f9fa; }
+      .tab-icon { fill: #6c757d; }
+      .active-tab { fill: #007bff; }
+    </style>
+  </defs>
+  
+  <!-- Background -->
+  <rect class="storyboard-bg" x="0" y="0" width="800" height="400"/>
+  
+  <!-- Title -->
+  <text class="screen-label" x="400" y="30" text-anchor="middle" font-size="16">Mobile App Tab Navigation</text>
+  
+  <!-- Screen 1: Home Tab -->
+  <g transform="translate(50, 60)">
+    <rect class="mobile-frame" x="0" y="0" width="140" height="280"/>
+    <text class="screen-label" x="70" y="-10" text-anchor="middle">Home</text>
+    <rect class="header-area" x="10" y="10" width="120" height="30"/>
+    <text x="70" y="30" text-anchor="middle" font-size="11" fill="#333">Home Screen</text>
+    <rect class="content-area" x="10" y="50" width="120" height="180"/>
+    <!-- Tab bar -->
+    <rect class="tab-area" x="10" y="240" width="120" height="30"/>
+    <rect class="active-tab" x="15" y="245" width="30" height="20" rx="2"/>
+    <rect class="tab-icon" x="50" y="245" width="30" height="20" rx="2"/>
+    <rect class="tab-icon" x="85" y="245" width="30" height="20" rx="2"/>
+  </g>
+  
+  <!-- Screen 2: Search Tab -->
+  <g transform="translate(250, 60)">
+    <rect class="mobile-frame" x="0" y="0" width="140" height="280"/>
+    <text class="screen-label" x="70" y="-10" text-anchor="middle">Search</text>
+    <rect class="header-area" x="10" y="10" width="120" height="30"/>
+    <text x="70" y="30" text-anchor="middle" font-size="11" fill="#333">Search</text>
+    <rect class="content-area" x="10" y="50" width="120" height="180"/>
+    <!-- Search bar -->
+    <rect fill="#e9ecef" x="20" y="60" width="100" height="30" rx="15"/>
+    <!-- Tab bar -->
+    <rect class="tab-area" x="10" y="240" width="120" height="30"/>
+    <rect class="tab-icon" x="15" y="245" width="30" height="20" rx="2"/>
+    <rect class="active-tab" x="50" y="245" width="30" height="20" rx="2"/>
+    <rect class="tab-icon" x="85" y="245" width="30" height="20" rx="2"/>
+  </g>
+  
+  <!-- Screen 3: Profile Tab -->
+  <g transform="translate(450, 60)">
+    <rect class="mobile-frame" x="0" y="0" width="140" height="280"/>
+    <text class="screen-label" x="70" y="-10" text-anchor="middle">Profile</text>
+    <rect class="header-area" x="10" y="10" width="120" height="30"/>
+    <text x="70" y="30" text-anchor="middle" font-size="11" fill="#333">Profile</text>
+    <rect class="content-area" x="10" y="50" width="120" height="180"/>
+    <!-- Profile avatar -->
+    <circle cx="70" cy="90" r="25" fill="#dee2e6"/>
+    <!-- Tab bar -->
+    <rect class="tab-area" x="10" y="240" width="120" height="30"/>
+    <rect class="tab-icon" x="15" y="245" width="30" height="20" rx="2"/>
+    <rect class="tab-icon" x="50" y="245" width="30" height="20" rx="2"/>
+    <rect class="active-tab" x="85" y="245" width="30" height="20" rx="2"/>
+  </g>
+  
+  <!-- Flow indicators -->
+  <text x="200" y="200" text-anchor="middle" font-size="20" fill="#9ca3af">→</text>
+  <text x="400" y="200" text-anchor="middle" font-size="20" fill="#9ca3af">→</text>
+</svg>

@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wireframe: Dashboard (Drawer Open)</title>
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            line-height: 1.5;
+            color: #333;
+            background: #f5f5f5;
+            overflow-x: hidden;
+        }
+        
+        /* Overlay for drawer */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 998;
+        }
+        
+        /* Layout utilities */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .flex { display: flex; }
+        .grid { display: grid; }
+        .flex-1 { flex: 1; }
+        .gap-4 { gap: 16px; }
+        .gap-6 { gap: 24px; }
+        .mb-4 { margin-bottom: 16px; }
+        .mb-6 { margin-bottom: 24px; }
+        
+        /* Component blocks */
+        .header {
+            height: 60px;
+            background: #ddd;
+            border-bottom: 2px solid #999;
+            display: flex;
+            align-items: center;
+            position: relative;
+            z-index: 997;
+        }
+        
+        .sidebar {
+            width: 250px;
+            background: #eee;
+            min-height: calc(100vh - 60px);
+            padding: 20px;
+            border-right: 1px solid #ccc;
+        }
+        
+        /* Mobile drawer - slides in from left */
+        .mobile-drawer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 280px;
+            height: 100vh;
+            background: #fff;
+            border-right: 3px solid #999;
+            padding: 20px;
+            z-index: 999;
+            box-shadow: 4px 0 16px rgba(0,0,0,0.2);
+            overflow-y: auto;
+        }
+        
+        .drawer-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid #ddd;
+        }
+        
+        .main-content {
+            flex: 1;
+            padding: 24px;
+            background: #fff;
+            min-height: calc(100vh - 60px);
+            opacity: 0.3; /* Dimmed when drawer is open */
+        }
+        
+        .card {
+            background: #fff;
+            border: 2px solid #ddd;
+            padding: 20px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+        
+        .placeholder {
+            background: #e5e5e5;
+            border: 1px dashed #999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-size: 14px;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+        
+        .button {
+            background: #ccc;
+            border: 2px solid #999;
+            padding: 10px 20px;
+            cursor: pointer;
+            text-decoration: none;
+            color: #333;
+            display: inline-block;
+            font-weight: 500;
+            text-align: center;
+        }
+        
+        .button:hover {
+            background: #bbb;
+        }
+        
+        .button.primary {
+            background: #999;
+            color: #fff;
+        }
+        
+        .button.icon-only {
+            padding: 8px;
+            width: 40px;
+            height: 40px;
+        }
+        
+        /* Navigation */
+        .nav-section {
+            margin-bottom: 32px;
+        }
+        
+        .nav-title {
+            font-size: 12px;
+            text-transform: uppercase;
+            color: #666;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+        
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            margin-bottom: 4px;
+            background: #f5f5f5;
+            text-decoration: none;
+            color: #333;
+            border: 1px solid transparent;
+            border-radius: 4px;
+        }
+        
+        .nav-item:hover {
+            background: #e5e5e5;
+        }
+        
+        .nav-item.active {
+            background: #999;
+            color: #fff;
+        }
+        
+        .nav-icon {
+            width: 20px;
+            height: 20px;
+            background: #ccc;
+            border: 1px solid #999;
+        }
+        
+        /* User profile in drawer */
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px;
+            background: #f9f9f9;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 24px;
+        }
+        
+        /* Screen navigation */
+        .screen-nav {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #fff;
+            padding: 16px;
+            border: 3px solid #999;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+        
+        .screen-nav h4 {
+            margin-bottom: 8px;
+            font-size: 14px;
+            text-transform: uppercase;
+            color: #666;
+        }
+        
+        .screen-nav ul {
+            list-style: none;
+        }
+        
+        .screen-nav li {
+            margin-bottom: 4px;
+        }
+        
+        .screen-nav a {
+            color: #333;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        
+        .screen-nav a:hover {
+            text-decoration: underline;
+        }
+        
+        /* State indicator */
+        .state-indicator {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #333;
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 4px;
+            font-weight: 600;
+            z-index: 1001;
+        }
+    </style>
+</head>
+<body>
+    <!-- State Indicator -->
+    <div class="state-indicator">
+        STATE: Mobile Drawer Open
+    </div>
+
+    <!-- Screen Navigation -->
+    <div class="screen-nav">
+        <h4>Wireframe Screens:</h4>
+        <ul>
+            <li><a href="wireframe-dashboard.html">Dashboard</a></li>
+            <li><a href="wireframe-drawer-open.html">→ Dashboard (Drawer)</a></li>
+            <li><a href="wireframe-detail.html">Detail View</a></li>
+            <li><a href="wireframe-modal.html">Modal State</a></li>
+            <li><a href="wireframe-mobile.html">Mobile View</a></li>
+        </ul>
+    </div>
+
+    <!-- Overlay -->
+    <div class="overlay"></div>
+
+    <!-- Mobile Drawer -->
+    <div class="mobile-drawer">
+        <div class="drawer-header">
+            <h2 style="font-size: 20px;">Menu</h2>
+            <button class="button icon-only">✕</button>
+        </div>
+
+        <!-- User Profile -->
+        <div class="user-profile">
+            <div class="placeholder" style="width: 50px; height: 50px; border-radius: 50%;">Avatar</div>
+            <div>
+                <div style="font-weight: 600;">User Name</div>
+                <div style="font-size: 14px; color: #666;">user@example.com</div>
+            </div>
+        </div>
+
+        <!-- Navigation Sections -->
+        <nav class="nav-section">
+            <div class="nav-title">Main Navigation</div>
+            <a href="#" class="nav-item active">
+                <div class="nav-icon"></div>
+                <span>Dashboard</span>
+            </a>
+            <a href="#" class="nav-item">
+                <div class="nav-icon"></div>
+                <span>Analytics</span>
+            </a>
+            <a href="#" class="nav-item">
+                <div class="nav-icon"></div>
+                <span>Projects</span>
+            </a>
+            <a href="#" class="nav-item">
+                <div class="nav-icon"></div>
+                <span>Team</span>
+            </a>
+            <a href="#" class="nav-item">
+                <div class="nav-icon"></div>
+                <span>Reports</span>
+            </a>
+        </nav>
+
+        <nav class="nav-section">
+            <div class="nav-title">Quick Actions</div>
+            <a href="#" class="nav-item">
+                <div class="nav-icon"></div>
+                <span>Create New</span>
+            </a>
+            <a href="#" class="nav-item">
+                <div class="nav-icon"></div>
+                <span>Import Data</span>
+            </a>
+            <a href="#" class="nav-item">
+                <div class="nav-icon"></div>
+                <span>Export</span>
+            </a>
+        </nav>
+
+        <nav class="nav-section">
+            <div class="nav-title">Account</div>
+            <a href="#" class="nav-item">
+                <div class="nav-icon"></div>
+                <span>Settings</span>
+            </a>
+            <a href="#" class="nav-item">
+                <div class="nav-icon"></div>
+                <span>Help & Support</span>
+            </a>
+            <a href="#" class="nav-item">
+                <div class="nav-icon"></div>
+                <span>Logout</span>
+            </a>
+        </nav>
+    </div>
+
+    <!-- Header (dimmed) -->
+    <header class="header" style="opacity: 0.3;">
+        <div class="container flex" style="width: 100%;">
+            <button class="button icon-only">☰</button>
+            <div class="placeholder" style="width: 150px; height: 40px; margin-left: 16px;">Logo</div>
+            <div class="flex-1"></div>
+            <div class="flex gap-4">
+                <button class="button">Search</button>
+                <button class="button">Notifications</button>
+                <div class="placeholder" style="width: 40px; height: 40px; border-radius: 50%;">User</div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Layout (dimmed) -->
+    <div class="flex">
+        <!-- Sidebar (hidden on mobile when drawer is open) -->
+        <aside class="sidebar" style="display: none;">
+            <!-- Sidebar content hidden when drawer is open -->
+        </aside>
+
+        <!-- Main Content (dimmed) -->
+        <main class="main-content">
+            <!-- Content is dimmed/disabled when drawer is open -->
+            <div style="pointer-events: none;">
+                <!-- Page Title -->
+                <div class="mb-6">
+                    <h1 style="font-size: 28px; font-weight: 600; margin-bottom: 8px;">Dashboard</h1>
+                    <p style="color: #666;">Welcome back, here's your overview</p>
+                </div>
+
+                <!-- Stats Grid -->
+                <div class="grid gap-4" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); margin-bottom: 32px;">
+                    <div class="card">
+                        <div class="placeholder mb-4" style="height: 60px;">Chart Icon</div>
+                        <div style="font-size: 24px; font-weight: 600; margin-bottom: 4px;">1,234</div>
+                        <div style="color: #666; font-size: 14px;">Total Items</div>
+                    </div>
+                    <div class="card">
+                        <div class="placeholder mb-4" style="height: 60px;">Graph Icon</div>
+                        <div style="font-size: 24px; font-weight: 600; margin-bottom: 4px;">+23%</div>
+                        <div style="color: #666; font-size: 14px;">Growth Rate</div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

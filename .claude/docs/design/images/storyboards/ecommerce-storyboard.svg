@@ -1,0 +1,87 @@
+<svg width="1200" height="400" xmlns="http://www.w3.org/2000/svg">
+  <!-- E-commerce Storyboard Example -->
+  <defs>
+    <style>
+      .storyboard-bg { fill: #f8f9fa; }
+      .screen-frame { fill: #ffffff; stroke: #6c757d; stroke-width: 2; }
+      .screen-label { font-family: system-ui, sans-serif; font-size: 14px; fill: #212529; font-weight: bold; }
+      .flow-arrow { stroke: #007bff; stroke-width: 2; fill: none; }
+      .header { fill: #007bff; }
+      .content { fill: #e9ecef; }
+    </style>
+  </defs>
+  
+  <!-- Background -->
+  <rect class="storyboard-bg" x="0" y="0" width="1200" height="400"/>
+  
+  <!-- Title -->
+  <text class="screen-label" x="600" y="30" text-anchor="middle" font-size="18">E-commerce Application Storyboard - User Navigation Flow</text>
+  
+  <!-- Screen 1: Home -->
+  <g transform="translate(50, 60)">
+    <rect class="screen-frame" x="0" y="0" width="200" height="280" rx="8"/>
+    <text class="screen-label" x="100" y="-10" text-anchor="middle">1. Home</text>
+    <rect class="header" x="0" y="0" width="200" height="40" rx="8"/>
+    <text x="100" y="25" text-anchor="middle" fill="white" font-size="12">Navigation Bar</text>
+    <rect class="content" x="10" y="50" width="180" height="80" rx="4"/>
+    <text x="100" y="95" text-anchor="middle" font-size="12">Hero Banner</text>
+    <rect class="content" x="10" y="140" width="85" height="60" rx="4"/>
+    <rect class="content" x="105" y="140" width="85" height="60" rx="4"/>
+    <text x="100" y="225" text-anchor="middle" font-size="11">Product Categories</text>
+  </g>
+  
+  <!-- Arrow 1 -->
+  <path class="flow-arrow" d="M 250 200 L 300 200" marker-end="url(#arrowhead)"/>
+  
+  <!-- Screen 2: Products -->
+  <g transform="translate(300, 60)">
+    <rect class="screen-frame" x="0" y="0" width="200" height="280" rx="8"/>
+    <text class="screen-label" x="100" y="-10" text-anchor="middle">2. Products</text>
+    <rect class="header" x="0" y="0" width="200" height="40" rx="8"/>
+    <text x="100" y="25" text-anchor="middle" fill="white" font-size="12">Category: Electronics</text>
+    <rect class="content" x="10" y="50" width="85" height="85" rx="4"/>
+    <rect class="content" x="105" y="50" width="85" height="85" rx="4"/>
+    <rect class="content" x="10" y="145" width="85" height="85" rx="4"/>
+    <rect class="content" x="105" y="145" width="85" height="85" rx="4"/>
+    <text x="100" y="255" text-anchor="middle" font-size="11">Product Grid</text>
+  </g>
+  
+  <!-- Arrow 2 -->
+  <path class="flow-arrow" d="M 500 200 L 550 200" marker-end="url(#arrowhead)"/>
+  
+  <!-- Screen 3: Cart -->
+  <g transform="translate(550, 60)">
+    <rect class="screen-frame" x="0" y="0" width="200" height="280" rx="8"/>
+    <text class="screen-label" x="100" y="-10" text-anchor="middle">3. Cart</text>
+    <rect class="header" x="0" y="0" width="200" height="40" rx="8"/>
+    <text x="100" y="25" text-anchor="middle" fill="white" font-size="12">Shopping Cart (3)</text>
+    <rect class="content" x="10" y="50" width="180" height="60" rx="4"/>
+    <rect class="content" x="10" y="120" width="180" height="60" rx="4"/>
+    <rect class="content" x="10" y="190" width="180" height="40" rx="4"/>
+    <text x="100" y="255" text-anchor="middle" font-size="11">Cart Items &amp; Total</text>
+  </g>
+  
+  <!-- Arrow 3 -->
+  <path class="flow-arrow" d="M 750 200 L 800 200" marker-end="url(#arrowhead)"/>
+  
+  <!-- Screen 4: Checkout -->
+  <g transform="translate(800, 60)">
+    <rect class="screen-frame" x="0" y="0" width="200" height="280" rx="8"/>
+    <text class="screen-label" x="100" y="-10" text-anchor="middle">4. Checkout</text>
+    <rect class="header" x="0" y="0" width="200" height="40" rx="8"/>
+    <text x="100" y="25" text-anchor="middle" fill="white" font-size="12">Secure Checkout</text>
+    <rect class="content" x="10" y="50" width="180" height="80" rx="4"/>
+    <text x="100" y="95" text-anchor="middle" font-size="11">Shipping Info</text>
+    <rect class="content" x="10" y="140" width="180" height="80" rx="4"/>
+    <text x="100" y="185" text-anchor="middle" font-size="11">Payment Details</text>
+    <rect x="10" y="240" width="180" height="30" rx="4" fill="#28a745"/>
+    <text x="100" y="260" text-anchor="middle" fill="white" font-size="12">Place Order</text>
+  </g>
+  
+  <!-- Arrow marker -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#007bff"/>
+    </marker>
+  </defs>
+</svg>

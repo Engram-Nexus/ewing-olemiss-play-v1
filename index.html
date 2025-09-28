@@ -666,27 +666,71 @@
                         return `[${linkText}](${linkPath})`;
                     }
 
-                    // Handle links to other markdown files
-                    if (linkPath.endsWith('.md') || linkPath.includes('.md#')) {
-                        let absolutePath = linkPath;
-                        if (!linkPath.startsWith('/') && !linkPath.startsWith('.knowledge/')) {
-                            const currentDir = targetPath.substring(0, targetPath.lastIndexOf('/'));
-                            absolutePath = `${currentDir}/${linkPath}`;
-                        } else if (!linkPath.startsWith('.knowledge/')) {
-                            absolutePath = `.knowledge/ewing-proposal${linkPath}`;
-                        }
+                    // Skip external URLs
+                    if (linkPath.startsWith('http://') || linkPath.startsWith('https://')) {
+                        return match;
+                    }
 
-                        // Preserve anchors in the path
-                        if (absolutePath.includes('#')) {
-                            const [filePath, hash] = absolutePath.split('#');
-                            return `[${linkText}](#" onclick="loadMarkdown('${filePath}', '${hash}'); return false;)`;
+                    // Handle internal knowledge base links
+                    let absolutePath = linkPath;
+
+                    // Handle relative paths
+                    if (!linkPath.startsWith('/') && !linkPath.startsWith('.knowledge/')) {
+                        // This is a relative path from current document
+                        const currentDir = targetPath.substring(0, targetPath.lastIndexOf('/'));
+                        absolutePath = `${currentDir}/${linkPath}`;
+                    } else if (linkPath.startsWith('/')) {
+                        // Absolute path from knowledge base root
+                        absolutePath = `.knowledge/ewing-proposal${linkPath}`;
+                    } else if (linkPath.startsWith('.knowledge/')) {
+                        // Already has full path
+                        absolutePath = linkPath;
+                    } else if (linkPath.startsWith('ewing-proposal/') || linkPath.match(/^[\w-]+\//)) {
+                        // Path from ewing-proposal root
+                        absolutePath = `.knowledge/${linkPath}`;
+                    }
+
+                    // Handle different link types
+                    let anchor = null;
+
+                    // Check for anchors
+                    if (absolutePath.includes('#')) {
+                        const parts = absolutePath.split('#');
+                        absolutePath = parts[0];
+                        anchor = parts[1];
+                    }
+
+                    // If path doesn't have an extension and doesn't end with /, check if it's a directory
+                    // and add README.md if so, otherwise add .md extension
+                    if (!absolutePath.endsWith('.md')) {
+                        // Check if this looks like a directory (ends with / or has subdirectories)
+                        if (absolutePath.endsWith('/')) {
+                            absolutePath = absolutePath + 'README.md';
+                        } else if (absolutePath.includes('/') && !absolutePath.includes('.')) {
+                            // Could be either a directory or a file without extension
+                            // For knowledge base, assume directories if no extension
+                            const lastPart = absolutePath.split('/').pop();
+                            if (lastPart && lastPart.toLowerCase() !== lastPart.toUpperCase()) {
+                                // Has mixed case or lowercase, likely a file
+                                absolutePath = absolutePath + '.md';
+                            } else {
+                                // All lowercase or special naming, check common patterns
+                                absolutePath = absolutePath + '.md';
+                            }
                         } else {
-                            return `[${linkText}](#" onclick="loadMarkdown('${absolutePath}'); return false;)`;
+                            absolutePath = absolutePath + '.md';
                         }
                     }
 
-                    // Keep external links as-is
-                    return match;
+                    // Normalize path
+                    absolutePath = absolutePath.replace(/\/+/g, '/');
+
+                    // Create onclick handler
+                    if (anchor) {
+                        return `[${linkText}](#" onclick="loadMarkdown('${absolutePath}', '${anchor}'); return false;)`;
+                    } else {
+                        return `[${linkText}](#" onclick="loadMarkdown('${absolutePath}'); return false;)`;
+                    }
                 });
 
                 // Render markdown with error handling

@@ -679,6 +679,11 @@
 
         // Function to create slug from heading text (matching GitHub's behavior)
         function slugify(text) {
+            // Handle undefined, null, or non-string input
+            if (!text || typeof text !== 'string') {
+                return '';
+            }
+
             return text
                 .toLowerCase()
                 .trim()
@@ -694,8 +699,16 @@
         const originalHeadingRenderer = renderer.heading;
 
         renderer.heading = function(text, level, raw) {
-            const slug = slugify(raw);
-            return `<h${level} id="${slug}">${text}</h${level}>`;
+            // Ensure we have valid input
+            const rawText = raw || text || '';
+            const slug = slugify(rawText);
+
+            // Only add ID if we have a valid slug
+            if (slug) {
+                return `<h${level} id="${slug}">${text}</h${level}>`;
+            } else {
+                return `<h${level}>${text}</h${level}>`;
+            }
         };
 
         // Configure marked options
@@ -813,8 +826,15 @@
                     return match;
                 });
 
-                // Render markdown
-                const html = marked.parse(text);
+                // Render markdown with error handling
+                let html;
+                try {
+                    html = marked.parse(text);
+                } catch (parseError) {
+                    console.error('Markdown parsing error:', parseError);
+                    // Try to render with basic fallback
+                    html = `<pre>${text}</pre>`;
+                }
                 document.getElementById('markdownContent').innerHTML = html;
 
                 // Process TOC links to scroll to anchors

@@ -192,15 +192,11 @@
 
         /* Markdown View */
         .markdown-view {
-            display: none;
+            display: block; /* Always visible now since it's the only view */
             background: white;
             border-radius: 8px;
             padding: 40px;
             box-shadow: var(--shadow);
-        }
-
-        .markdown-view.active {
-            display: block;
         }
 
         /* Breadcrumb */
@@ -458,7 +454,7 @@
     </header>
 
     <div class="main-container">
-        <nav class="sidebar" id="sidebar">
+        <nav class="sidebar active" id="sidebar">
             <h2>📚 Knowledge Explorer</h2>
 
             <div class="nav-section">
@@ -527,12 +523,12 @@
             </div>
         </nav>
 
-        <main class="content" id="content">
+        <main class="content with-sidebar" id="content">
             <!-- Markdown View (now the only view) -->
-            <div class="markdown-view active" id="markdownView">
+            <div class="markdown-view" id="markdownView">
                 <div class="breadcrumb" id="breadcrumb"></div>
                 <div class="markdown-content" id="markdownContent">
-                    <div class="loading">Loading content</div>
+                    <div class="loading">Loading content...</div>
                 </div>
             </div>
         </main>
@@ -628,10 +624,13 @@
 
             currentPath = targetPath;
 
-            // Show markdown view with sidebar
-            document.getElementById('markdownView').classList.add('active');
-            document.getElementById('sidebar').classList.add('active');
-            document.getElementById('content').classList.add('with-sidebar');
+            // Sidebar and content are always visible now, just ensure classes are set
+            if (!document.getElementById('sidebar').classList.contains('active')) {
+                document.getElementById('sidebar').classList.add('active');
+            }
+            if (!document.getElementById('content').classList.contains('with-sidebar')) {
+                document.getElementById('content').classList.add('with-sidebar');
+            }
 
             // Update breadcrumb
             updateBreadcrumb(targetPath);
@@ -847,20 +846,23 @@
         }
 
         // Handle direct URL navigation
-        window.addEventListener('load', () => {
-            const hash = window.location.hash;
-            if (hash && hash.startsWith('#')) {
-                const { path, anchor, scrollOnly } = parseUrlHash(hash);
-                if (scrollOnly && anchor) {
-                    // Just scroll to anchor in current document
-                    setTimeout(() => scrollToAnchor(anchor), 100);
-                } else if (path) {
-                    loadMarkdown(path, anchor);
+        window.addEventListener('DOMContentLoaded', () => {
+            // Small delay to ensure all elements are ready
+            setTimeout(() => {
+                const hash = window.location.hash;
+                if (hash && hash.startsWith('#')) {
+                    const { path, anchor, scrollOnly } = parseUrlHash(hash);
+                    if (scrollOnly && anchor) {
+                        // Just scroll to anchor in current document
+                        setTimeout(() => scrollToAnchor(anchor), 100);
+                    } else if (path) {
+                        loadMarkdown(path, anchor);
+                    }
+                } else {
+                    // No hash - show home (which loads the README)
+                    showHome();
                 }
-            } else {
-                // No hash - show home (which loads the README)
-                showHome();
-            }
+            }, 100);
         });
 
         // Handle browser back/forward

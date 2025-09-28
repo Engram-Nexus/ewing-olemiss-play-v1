@@ -3,7 +3,7 @@
 This matrix integrates knowledge from all blocks and subtopics in this ewing-proposal > technology path.
 
 ## Subtopics
-*No subtopics in this section.*
+- [📁 primary-features](primary-features/)
 
 ## Blocks
 - [📄 development-plan](development-plan.md)

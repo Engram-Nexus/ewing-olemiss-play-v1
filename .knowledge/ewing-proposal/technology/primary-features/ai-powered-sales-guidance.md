@@ -1,5 +1,18 @@
 # AI-Powered Sales Guidance System
 
+## Table of Contents
+- [Overview](#overview)
+- [Technical Requirements](#technical-requirements)
+  - [System Architecture](#system-architecture)
+  - [Software Development](#software-development)
+  - [User Features](#user-features)
+  - [User Experience](#user-experience)
+  - [Performance Requirements](#performance-requirements)
+- [Integration Architecture](#integration-architecture)
+- [Security & Compliance](#security--compliance)
+- [Implementation Phases](#implementation-phases)
+- [Success Metrics](#success-metrics)
+
 ## Overview
 Real-time artificial intelligence system that provides dynamic sales coaching during live calls. The platform analyzes conversations in real-time, generates contextual scripts, handles objections instantly, and learns from successful patterns to continuously improve sales outcomes.
 
@@ -8,10 +21,26 @@ Real-time artificial intelligence system that provides dynamic sales coaching du
 ### System Architecture
 
 **AI Processing Pipeline**
-```
-Live Audio Stream → Sentiment Analysis → Context Extraction →
-LLM Script Generation → Objection Detection → Response Suggestion →
-Performance Analytics → Pattern Learning → Model Improvement
+
+```mermaid
+graph TB
+    A[Live Audio Stream] --> B[Sentiment Analysis]
+    A --> C[Context Extraction]
+    B --> D{Sentiment Score}
+    C --> D
+    D -->|Negative| E[Objection Detection]
+    D -->|Positive| F[Next Best Action]
+    E --> G[Response Suggestion]
+    F --> G
+    G --> H[Performance Analytics]
+    H --> I[Pattern Learning]
+    I --> J[Model Improvement]
+    J -->|Feedback Loop| B
+
+    style A fill:#e3f2fd
+    style D fill:#ffecb3
+    style G fill:#c8e6c9
+    style J fill:#f8bbd0
 ```
 
 **Core AI Infrastructure**
@@ -23,31 +52,37 @@ Performance Analytics → Pattern Learning → Model Improvement
 
 ### Software Development
 
-**Real-time Analysis Engine**
-```python
-class SalesGuidanceEngine:
-    def __init__(self):
-        self.sentiment_analyzer = DistilBERT(model="sales-sentiment")
-        self.script_generator = GPT4(fine_tuned="sales-conversations")
-        self.objection_handler = RAGEngine(knowledge_base="objections")
+**Real-time Analysis Architecture**
 
-    async def process_conversation(self, audio_stream):
-        # Parallel processing for low latency
-        sentiment = await self.analyze_sentiment(audio_stream)
-        context = await self.extract_context(audio_stream)
+```mermaid
+sequenceDiagram
+    participant Audio as Audio Stream
+    participant SA as Sentiment Analyzer
+    participant CE as Context Extractor
+    participant LLM as LLM Engine
+    participant Cache as Redis Cache
+    participant UI as Agent UI
 
-        # Generate guidance based on real-time analysis
-        if sentiment.score < 0.3:  # Negative sentiment detected
-            guidance = await self.handle_objection(context)
-        else:
-            guidance = await self.generate_next_best_action(context)
-
-        return {
-            "script": guidance.script,
-            "confidence": guidance.confidence,
-            "alternatives": guidance.alternatives
-        }
+    Audio->>SA: Stream audio
+    Audio->>CE: Stream audio
+    SA-->>LLM: Sentiment score
+    CE-->>LLM: Context data
+    LLM->>Cache: Check common responses
+    Cache-->>LLM: Cached guidance
+    LLM->>UI: Display guidance
+    UI->>Audio: Agent response
 ```
+
+**AI Component Table**
+
+| Component | Model/Technology | Purpose | Response Time |
+|-----------|-----------------|---------|---------------|
+| Sentiment Analysis | DistilBERT (fine-tuned) | Detect emotional state | <100ms |
+| Context Extraction | Named Entity Recognition | Extract key information | <50ms |
+| Script Generation | GPT-4 (fine-tuned) | Generate dynamic scripts | <300ms |
+| Objection Detection | BERT Classifier | Identify objections | <75ms |
+| Response Suggestion | RAG Engine | Retrieve best responses | <150ms |
+| Pattern Learning | XGBoost | Identify success patterns | Batch process |
 
 **Machine Learning Stack**
 - **Sentiment Analysis**: BERT/RoBERTa models fine-tuned on sales calls

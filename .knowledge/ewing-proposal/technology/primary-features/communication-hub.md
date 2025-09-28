@@ -1,5 +1,13 @@
 # Communication Hub
 
+## Table of Contents
+- [Technical Requirements](#technical-requirements)
+  - [System Architecture](#system-architecture)
+  - [Communication Channels](#communication-channels)
+  - [Key Features](#key-features)
+- [Implementation](#implementation)
+- [Success Metrics](#success-metrics)
+
 ## Overview
 Omnichannel communication platform unifying voice, SMS, email, and messaging channels in a single interface with recording, transcription, and analytics capabilities.
 

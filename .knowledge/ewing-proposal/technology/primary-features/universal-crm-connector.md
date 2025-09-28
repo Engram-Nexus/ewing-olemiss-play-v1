@@ -1,5 +1,13 @@
 # Universal CRM Connector
 
+## Table of Contents
+- [Technical Requirements](#technical-requirements)
+  - [System Architecture](#system-architecture)
+  - [Supported Platforms](#supported-platforms)
+  - [Key Features](#key-features)
+- [Implementation](#implementation)
+- [Success Metrics](#success-metrics)
+
 ## Overview
 Unified integration platform providing seamless bi-directional synchronization with all major CRM systems. Eliminates data silos through intelligent field mapping, real-time updates, and automatic conflict resolution.
 

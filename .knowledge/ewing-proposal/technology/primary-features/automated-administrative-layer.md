@@ -1,5 +1,18 @@
 # Automated Administrative Layer
 
+## Table of Contents
+- [Overview](#overview)
+- [Technical Requirements](#technical-requirements)
+  - [System Architecture](#system-architecture)
+  - [Software Development](#software-development)
+  - [User Features](#user-features)
+  - [User Experience](#user-experience)
+  - [Performance Requirements](#performance-requirements)
+- [Integration Architecture](#integration-architecture)
+- [Security & Compliance](#security--compliance)
+- [Implementation Phases](#implementation-phases)
+- [Success Metrics](#success-metrics)
+
 ## Overview
 Intelligent automation system that eliminates manual administrative tasks, enabling sales representatives to focus entirely on selling. Handles call routing, CRM updates, calendar management, document generation, and compliance automatically.
 
@@ -8,10 +21,27 @@ Intelligent automation system that eliminates manual administrative tasks, enabl
 ### System Architecture
 
 **Workflow Orchestration Pipeline**
-```
-Event Trigger → Workflow Engine (Temporal) → Task Queue →
-Service Integration → Action Execution → Result Validation →
-CRM Update → Notification → Audit Log
+
+```mermaid
+graph TB
+    A[Event Trigger] --> B[Workflow Engine<br/>Temporal]
+    B --> C[Task Queue<br/>RabbitMQ]
+    C --> D{Service Integration}
+    D --> E[CRM Update]
+    D --> F[Calendar Sync]
+    D --> G[Document Gen]
+    D --> H[Email Send]
+    E --> I[Result Validation]
+    F --> I
+    G --> I
+    H --> I
+    I --> J[Notification]
+    I --> K[Audit Log]
+
+    style A fill:#e3f2fd
+    style B fill:#fff3e0
+    style D fill:#ffecb3
+    style I fill:#c8e6c9
 ```
 
 **Core Infrastructure**

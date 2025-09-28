@@ -1,5 +1,12 @@
 # Blockchain Verification
 
+## Table of Contents
+- [Technical Requirements](#technical-requirements)
+  - [Blockchain Platform](#blockchain-platform)
+  - [Verification Features](#verification-features)
+- [Implementation](#implementation)
+- [Success Metrics](#success-metrics)
+
 ## Overview
 Decentralized credential management system using blockchain for verifiable achievements, portable reputation, and automated commission distribution.
 

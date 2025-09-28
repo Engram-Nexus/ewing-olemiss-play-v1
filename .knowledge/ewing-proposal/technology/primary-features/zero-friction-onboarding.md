@@ -1,5 +1,19 @@
 # Zero-Friction Onboarding
 
+## Table of Contents
+- [Technical Requirements](#technical-requirements)
+  - [System Architecture](#system-architecture)
+  - [Software Development](#software-development)
+  - [User Features](#user-features)
+  - [User Experience](#user-experience)
+  - [Performance Requirements](#performance-requirements)
+- [Security & Compliance](#security--compliance)
+- [Implementation Phases](#implementation-phases)
+  - [Phase 1: Foundation (Week 1-2)](#phase-1:-foundation-week-1-2)
+  - [Phase 2: Automation (Week 3-4)](#phase-2:-automation-week-3-4)
+  - [Phase 3: Optimization (Week 5-6)](#phase-3:-optimization-week-5-6)
+- [Success Metrics](#success-metrics)
+
 ## Overview
 Seamless user onboarding that eliminates all traditional barriers to entry. Users can start making productive calls within minutes using biometric authentication, pre-configured campaigns, and progressive disclosure interfaces that adapt to skill level.
 
@@ -8,9 +22,25 @@ Seamless user onboarding that eliminates all traditional barriers to entry. User
 ### System Architecture
 
 **Onboarding Flow Pipeline**
-```
-Biometric Enrollment → Identity Verification → Campaign Assignment →
-List Loading → Training Module → First Call → Progressive UI Activation
+
+```mermaid
+graph LR
+    A[User Arrives] --> B[Biometric<br/>Enrollment]
+    B --> C[Identity<br/>Verification]
+    C --> D[Campaign<br/>Assignment]
+    D --> E[List<br/>Loading]
+    E --> F[Training<br/>Module]
+    F --> G[First Call]
+    G --> H[Progressive<br/>UI Activation]
+
+    style A fill:#e1f5fe
+    style B fill:#fff3e0
+    style C fill:#f3e5f5
+    style D fill:#e8f5e9
+    style E fill:#fce4ec
+    style F fill:#fff9c4
+    style G fill:#c5e1a5
+    style H fill:#d1c4e9
 ```
 
 **Authentication Infrastructure**
@@ -22,35 +52,37 @@ List Loading → Training Module → First Call → Progressive UI Activation
 
 ### Software Development
 
-**Biometric Implementation**
-```typescript
-class BiometricOnboarding {
-  async enrollUser(userId: string) {
-    const publicKeyCredentialCreationOptions = {
-      challenge: new Uint8Array(32),
-      rp: { name: "Sales Platform", id: "sales.ewing.com" },
-      user: {
-        id: Uint8Array.from(userId, c => c.charCodeAt(0)),
-        name: user.email,
-        displayName: user.name
-      },
-      pubKeyCredParams: [{alg: -7, type: "public-key"}],
-      authenticatorSelection: {
-        authenticatorAttachment: "platform",
-        userVerification: "required"
-      },
-      timeout: 60000,
-      attestation: "direct"
-    };
+**Biometric Authentication Flow**
 
-    const credential = await navigator.credentials.create({
-      publicKey: publicKeyCredentialCreationOptions
-    });
+```mermaid
+sequenceDiagram
+    participant User
+    participant Browser
+    participant Authenticator
+    participant Server
 
-    return this.saveCredential(credential, userId);
-  }
-}
+    User->>Browser: Initiate enrollment
+    Browser->>Authenticator: Request biometric
+    Authenticator->>User: Prompt for biometric
+    User->>Authenticator: Provide fingerprint/face
+    Authenticator->>Browser: Generate credential
+    Browser->>Server: Send public key
+    Server->>Browser: Confirm enrollment
+    Browser->>User: Success notification
+
+    Note over Authenticator: Biometric data never leaves device
+    Note over Server: Only public key stored
 ```
+
+**Authentication Methods Table**
+
+| Method | Technology | Security Level | Fallback | User Experience |
+|--------|------------|----------------|----------|-----------------|
+| Face ID | WebAuthn/FaceID | Very High | PIN/Password | Seamless, <1s |
+| Fingerprint | TouchID/Android | Very High | PIN/Password | Quick, <2s |
+| Voice | Speaker Recognition | High | SMS OTP | Natural, <3s |
+| SMS OTP | Twilio Verify | Medium | Email Magic Link | Familiar, <30s |
+| Email Link | SendGrid | Medium | Support Contact | Universal, <60s |
 
 **Progressive Web App Setup**
 - **Service Workers**: Offline functionality from first load

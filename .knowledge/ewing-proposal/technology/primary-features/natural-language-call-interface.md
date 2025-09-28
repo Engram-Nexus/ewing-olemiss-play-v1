@@ -1,5 +1,20 @@
 # Natural Language Call Interface
 
+## Table of Contents
+- [Technical Requirements](#technical-requirements)
+  - [System Architecture](#system-architecture)
+  - [Software Development](#software-development)
+  - [User Features](#user-features)
+  - [User Experience](#user-experience)
+- [Performance Requirements](#performance-requirements)
+- [Security & Compliance](#security--compliance)
+- [Integration Points](#integration-points)
+- [Implementation Phases](#implementation-phases)
+  - [Phase 1: Foundation (Weeks 1-4)](#phase-1:-foundation-weeks-1-4)
+  - [Phase 2: Enhancement (Weeks 5-8)](#phase-2:-enhancement-weeks-5-8)
+  - [Phase 3: Scale (Weeks 9-12)](#phase-3:-scale-weeks-9-12)
+- [Success Metrics](#success-metrics)
+
 ## Overview
 Voice-operated sales platform enabling complete hands-free operation through natural language commands. Users simply speak "Dial my list" to begin productive calling, transforming complex CRM operations into intuitive voice interactions that eliminate computer literacy barriers.
 
@@ -8,9 +23,21 @@ Voice-operated sales platform enabling complete hands-free operation through nat
 ### System Architecture
 
 **Core Voice Processing Pipeline**
-```
-Audio Capture (WebRTC) → Streaming Transcription (Whisper/Cloud ASR) →
-NLP Intent Processing → CRM Integration → Response Generation → TTS Output
+
+```mermaid
+graph LR
+    A[Audio Capture<br/>WebRTC] --> B[Streaming Transcription<br/>Whisper/Cloud ASR]
+    B --> C[NLP Intent<br/>Processing]
+    C --> D[CRM<br/>Integration]
+    D --> E[Response<br/>Generation]
+    E --> F[TTS<br/>Output]
+
+    style A fill:#e1f5fe
+    style B fill:#fff3e0
+    style C fill:#f3e5f5
+    style D fill:#e8f5e9
+    style E fill:#fce4ec
+    style F fill:#fff9c4
 ```
 
 **WebRTC Real-time Communication**
@@ -29,28 +56,38 @@ NLP Intent Processing → CRM Integration → Response Generation → TTS Output
 
 ### Software Development
 
-**Frontend Implementation**
-```javascript
-// Voice command recognition system
-class VoiceCommandInterface {
-  constructor() {
-    this.recognizer = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-    this.recognizer.continuous = true;
-    this.recognizer.interimResults = true;
-    this.commands = new Map([
-      ['dial my list', () => this.startDialing()],
-      ['call next prospect', () => this.dialNext()],
-      ['schedule follow-up', (params) => this.scheduleCallback(params)]
-    ]);
-  }
+**Voice Command Architecture**
 
-  async processCommand(transcript) {
-    const intent = await this.nlp.extractIntent(transcript);
-    const handler = this.commands.get(intent.command);
-    if (handler) await handler(intent.parameters);
-  }
-}
+```mermaid
+flowchart TD
+    A[Voice Input] --> B{Speech Recognition}
+    B --> C[Transcript Generation]
+    C --> D[NLP Intent Extraction]
+    D --> E{Command Matching}
+    E -->|"Dial My List"| F[Start Dialing]
+    E -->|"Call Next"| G[Dial Next Prospect]
+    E -->|"Schedule Follow-up"| H[Create Callback]
+    E -->|"Add Note"| I[Update CRM]
+    E -->|Unknown| J[Request Clarification]
+
+    style A fill:#bbdefb
+    style E fill:#ffccbc
+    style F fill:#c8e6c9
+    style G fill:#c8e6c9
+    style H fill:#c8e6c9
+    style I fill:#c8e6c9
 ```
+
+**System Components Table**
+
+| Component | Technology | Purpose | Latency Target |
+|-----------|------------|---------|----------------|
+| Audio Capture | WebRTC MediaStream API | High-quality audio input | <50ms |
+| Speech Recognition | Web Speech API / Whisper | Convert speech to text | <200ms |
+| Intent Processing | BERT/NLP Models | Extract user commands | <100ms |
+| Command Execution | Event-driven handlers | Execute voice actions | <50ms |
+| Response Generation | Template/AI engines | Create voice responses | <300ms |
+| Text-to-Speech | Web Speech Synthesis | Voice output | <150ms |
 
 **Backend Services**
 - **Node.js/NestJS**: Microservices architecture for voice processing

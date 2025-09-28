@@ -1,5 +1,13 @@
 # Quality Assurance System
 
+## Table of Contents
+- [Technical Requirements](#technical-requirements)
+  - [System Architecture](#system-architecture)
+  - [QA Features](#qa-features)
+  - [Key Capabilities](#key-capabilities)
+- [Implementation](#implementation)
+- [Success Metrics](#success-metrics)
+
 ## Overview
 AI-powered quality monitoring platform providing real-time call coaching, automated scoring, compliance checking, and continuous improvement recommendations.
 

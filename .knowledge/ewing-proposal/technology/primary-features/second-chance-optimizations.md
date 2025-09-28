@@ -1,5 +1,12 @@
 # Second-Chance Optimizations
 
+## Table of Contents
+- [Technical Requirements](#technical-requirements)
+  - [Inclusive Design](#inclusive-design)
+  - [Special Features](#special-features)
+- [Implementation](#implementation)
+- [Success Metrics](#success-metrics)
+
 ## Overview
 Specialized features designed for formerly incarcerated individuals and others facing employment barriers, emphasizing simplicity, support, and dignity.
 

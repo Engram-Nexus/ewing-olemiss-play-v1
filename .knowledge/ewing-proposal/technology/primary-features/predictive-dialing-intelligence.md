@@ -1,5 +1,12 @@
 # Predictive Dialing Intelligence
 
+## Table of Contents
+- [Technical Requirements](#technical-requirements)
+  - [Predictive Algorithm](#predictive-algorithm)
+  - [Intelligence Features](#intelligence-features)
+- [Implementation](#implementation)
+- [Success Metrics](#success-metrics)
+
 ## Overview
 AI-driven dialing optimization system maximizing connection rates while maintaining compliance and preventing agent burnout.
 

@@ -847,8 +847,8 @@
                             const targetElement = document.getElementById(targetId);
                             if (targetElement) {
                                 targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                                // Update URL hash
-                                history.pushState(null, null, `#${currentPath.replace('.knowledge/', '')}#${targetId}`);
+                                // Update URL hash - use simple anchor for same-page navigation
+                                history.pushState(null, null, `#${targetId}`);
                             }
                         });
                     }
@@ -883,11 +883,13 @@
                     window.scrollTo(0, 0);
                 }
 
-                // Update URL to reflect current document and anchor
-                const newHash = targetAnchor
-                    ? `#${targetPath.replace('.knowledge/', '')}#${targetAnchor}`
-                    : `#${targetPath.replace('.knowledge/', '')}`;
-                history.replaceState(null, null, newHash);
+                // Update URL to reflect current document
+                // Don't update if we're already at the correct URL
+                const currentHash = window.location.hash;
+                const expectedHash = `#${targetPath.replace('.knowledge/', '')}`;
+                if (!currentHash.startsWith(expectedHash)) {
+                    history.replaceState(null, null, expectedHash);
+                }
 
             } catch (error) {
                 document.getElementById('markdownContent').innerHTML = `
@@ -931,6 +933,17 @@
             // Remove leading #
             let hashContent = hash.substring(1);
 
+            // Check if this is just an anchor without a path (e.g., #the-fundamental-belief)
+            if (hashContent && !hashContent.includes('/') && !hashContent.includes('#')) {
+                // This is a standalone anchor for the current document
+                if (currentPath) {
+                    return { path: null, anchor: hashContent, scrollOnly: true };
+                } else {
+                    // No current document loaded, can't scroll to anchor
+                    return { path: null, anchor: null };
+                }
+            }
+
             // Handle double hash for anchors (e.g., #/path/to/file.md#anchor)
             let filePath = null;
             let anchor = null;
@@ -939,26 +952,41 @@
                 const parts = hashContent.split('#');
                 filePath = parts[0];
                 anchor = parts[1];
-            } else {
+            } else if (hashContent.startsWith('/')) {
                 filePath = hashContent;
             }
 
-            // Convert to proper path
-            if (filePath && filePath.startsWith('/')) {
-                filePath = '.knowledge' + filePath;
-            } else if (filePath) {
-                filePath = '.knowledge/' + filePath;
+            // Convert to proper path if we have a file path
+            if (filePath) {
+                if (filePath.startsWith('/')) {
+                    filePath = '.knowledge' + filePath;
+                } else {
+                    filePath = '.knowledge/' + filePath;
+                }
             }
 
             return { path: filePath, anchor: anchor };
+        }
+
+        // Scroll to anchor in current document
+        function scrollToAnchor(anchor) {
+            if (anchor) {
+                const element = document.getElementById(anchor);
+                if (element) {
+                    element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }
         }
 
         // Handle direct URL navigation
         window.addEventListener('load', () => {
             const hash = window.location.hash;
             if (hash && hash.startsWith('#')) {
-                const { path, anchor } = parseUrlHash(hash);
-                if (path) {
+                const { path, anchor, scrollOnly } = parseUrlHash(hash);
+                if (scrollOnly && anchor) {
+                    // Just scroll to anchor in current document
+                    setTimeout(() => scrollToAnchor(anchor), 100);
+                } else if (path) {
                     loadMarkdown(path, anchor);
                 }
             }
@@ -968,14 +996,27 @@
         window.addEventListener('popstate', (event) => {
             const hash = window.location.hash;
             if (hash && hash.startsWith('#')) {
-                const { path, anchor } = parseUrlHash(hash);
-                if (path) {
+                const { path, anchor, scrollOnly } = parseUrlHash(hash);
+                if (scrollOnly && anchor) {
+                    // Just scroll to anchor in current document
+                    scrollToAnchor(anchor);
+                } else if (path) {
                     loadMarkdown(path, anchor);
                 } else {
                     showHome();
                 }
             } else {
                 showHome();
+            }
+        });
+
+        // Handle hash change events for same-page navigation
+        window.addEventListener('hashchange', (event) => {
+            const hash = window.location.hash;
+            if (hash && hash.startsWith('#') && !hash.includes('/')) {
+                // This is a same-page anchor link
+                const anchor = hash.substring(1);
+                scrollToAnchor(anchor);
             }
         });
     </script>

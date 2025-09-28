@@ -8,6 +8,7 @@ This matrix integrates knowledge from all blocks and subtopics in this ewing-pro
 ## Blocks
 - [📄 data-analysis](data-analysis.md)
 - [📄 development-plan](development-plan.md)
+- [📄 leads-data](leads-data.md)
 - [📄 primary-features](primary-features.md)
 - [📄 tech-stack](tech-stack.md)
 

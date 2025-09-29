@@ -846,7 +846,7 @@
         function updateBreadcrumb(path) {
             const parts = path.replace('../.knowledge/', '').replace('.md', '').split('/');
             let breadcrumbHtml = '<a href="#" onclick="showHome(); return false;">Home</a> /';
-            let currentPath = '.knowledge';
+            let currentPath = '../.knowledge';
 
             parts.forEach((part, index) => {
                 currentPath += '/' + part;

@@ -652,15 +652,27 @@
             document.getElementById('markdownContent').innerHTML = '<div class="loading">Loading content</div>';
 
             try {
-                // For GitHub Pages, prepend the base path if not already present
+                // For GitHub Pages, we need to construct the correct URL
                 let fetchPath = targetPath;
+
                 // Check if we're on GitHub Pages (not local development)
                 if (window.location.hostname === 'engram-nexus.github.io') {
-                    // If path doesn't start with /ewing-olemiss-play-v1/, add it
-                    if (!fetchPath.startsWith('/ewing-olemiss-play-v1/')) {
-                        fetchPath = '/ewing-olemiss-play-v1/' + fetchPath;
+                    // Remove leading ./ if present and also handle .knowledge/ paths
+                    if (fetchPath.startsWith('./')) {
+                        fetchPath = fetchPath.substring(2);
+                    } else if (fetchPath.startsWith('.knowledge/')) {
+                        // Remove the leading dot for .knowledge paths
+                        fetchPath = fetchPath.substring(1);
                     }
+                    // Ensure we have an absolute path from the repository root
+                    if (!fetchPath.startsWith('/')) {
+                        fetchPath = '/' + fetchPath;
+                    }
+                    // Prepend the repository name for GitHub Pages project sites
+                    fetchPath = '/ewing-olemiss-play-v1' + fetchPath;
                 }
+
+                console.log('Fetching from:', fetchPath); // Debug log
                 const response = await fetch(fetchPath);
                 if (!response.ok) {
                     throw new Error(`Failed to load: ${response.status}`);

@@ -1,7 +1,7 @@
 # Executive Summary - Ewing Business Proposal
 
 ## Vision & Mission
-Ewing presents a comprehensive business model that bridges education, technology, and social impact through a revolutionary voice-operated sales enablement platform. The core mission is to democratize high-value sales opportunities for underserved populations, particularly formerly incarcerated individuals, while creating profitable business ventures across multiple sectors.
+Ewing presents a comprehensive business model that bridges education, technology, and social impact through a revolutionary voice-operated sales enablement platform operating as the "Uber of sales calling." This two-sided marketplace creates an on-demand ecosystem connecting businesses needing sales capacity with a flexible workforce of students and formerly incarcerated individuals. The core mission is to democratize high-value sales opportunities for underserved populations while leveraging network effects and dynamic pricing to create profitable, scalable business ventures across multiple sectors.
 
 ## Core Components
 
@@ -12,12 +12,14 @@ Ewing presents a comprehensive business model that bridges education, technology
 - **Success Metric**: Binary - on the phone daily = win
 - **Expansion Plan**: Scale to SEC-wide universities via private network connections
 
-### 2. Voice-Operated Sales Platform
-- **Key Feature**: Complete voice control eliminating computer literacy barriers
-- **Target Users**: Formerly incarcerated individuals, particularly those with marijuana-related felonies
-- **Technology Stack**: AI-powered call guidance, real-time objection handling, automated CRM integration
-- **User Experience**: Zero passwords, biometric authentication, magic-like simplicity
-- **Revenue Model**: Fractional calling arrangements with guaranteed business contracts
+### 2. Platform Economy Model - "Uber of Sales Calling"
+- **Two-Sided Marketplace**: On-demand matching between businesses (demand) and sales workers (supply)
+- **Network Effects**: More workers create better availability; more businesses create diverse opportunities
+- **Dynamic Pricing**: Surge pricing during peak demand periods ensures optimal resource allocation
+- **Voice-First Technology**: Complete voice control eliminating computer literacy barriers
+- **Target Supply**: Students, formerly incarcerated individuals, career changers seeking flexible high-value work
+- **User Experience**: Zero passwords, biometric authentication, instant matching, performance-based advancement
+- **Revenue Model**: Commission-based (15-30%) with performance bonuses and enterprise subscriptions
 
 ### 3. Business Integration Strategy
 - **RevsUp**: Executive recruiting platform needing sales acceleration
@@ -50,8 +52,10 @@ The platform specifically addresses the injustice faced by individuals with mari
 5. Proven pathway for formerly incarcerated individuals to earn substantial income
 
 ## Unique Differentiators
+- **Platform Economy Model**: First true "Uber of sales calling" with two-sided marketplace dynamics
 - **Voice-First Design**: Eliminates traditional barriers to technology adoption
+- **Network Effects**: Cross-side benefits where more workers improve service quality and more businesses create opportunities
+- **Dynamic Resource Allocation**: Surge pricing and intelligent matching optimize supply-demand balance
 - **Education-to-Employment Pipeline**: Direct connection from classroom to revenue
-- **Network Effects**: Each successful placement strengthens recruiting and business development
-- **Mission Alignment**: Profitable business model with profound social impact
+- **Mission Alignment**: Profitable business model with profound social impact powered by market forces
 - **Proven Team**: Operators with multiple successful exits and deep domain expertise

@@ -665,18 +665,12 @@
                     if (!fetchPath.startsWith('/')) {
                         fetchPath = '/' + fetchPath;
                     }
-                    // Extract repo name from pathname (e.g., /repo-name/... => repo-name)
+                    // Extract repo name from pathname (e.g., /repo-name/index.html => repo-name)
                     const pathParts = window.location.pathname.split('/').filter(p => p);
                     const repoName = pathParts.length > 0 ? pathParts[0] : '';
-                    // Prepend repo name if this is a project site
-                    if (repoName && !window.location.pathname.startsWith('/' + repoName + '/')) {
+                    // Prepend repo name to create full path
+                    if (repoName && !fetchPath.startsWith('/' + repoName + '/')) {
                         fetchPath = '/' + repoName + fetchPath;
-                    } else if (repoName) {
-                        // Already has repo name in current path, use it as base
-                        const basePath = '/' + repoName;
-                        if (!fetchPath.startsWith(basePath)) {
-                            fetchPath = basePath + fetchPath;
-                        }
                     }
                 }
 

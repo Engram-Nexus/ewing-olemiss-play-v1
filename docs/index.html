@@ -908,20 +908,31 @@
 
         // Parse URL hash to extract file path and anchor
         function parseUrlHash(hash) {
+            console.log('[DEBUG] parseUrlHash called with:', hash);
             if (!hash || !hash.startsWith('#')) {
+                console.log('[DEBUG] parseUrlHash: no hash, returning null');
                 return { path: null, anchor: null };
             }
 
             // Remove leading #
             let hashContent = hash.substring(1);
+            console.log('[DEBUG] parseUrlHash hashContent:', hashContent);
 
             // Check if this is just an anchor without a path (e.g., #the-fundamental-belief)
+            // Special case: #README should be treated as home, not an anchor
             if (hashContent && !hashContent.includes('/') && !hashContent.includes('#')) {
                 // This is a standalone anchor for the current document
                 if (currentPath) {
+                    console.log('[DEBUG] parseUrlHash: treating as scrollOnly anchor');
                     return { path: null, anchor: hashContent, scrollOnly: true };
                 } else {
-                    // No current document loaded, can't scroll to anchor
+                    // No current document loaded - if it's README, treat as home request
+                    if (hashContent === 'README' || hashContent === '') {
+                        console.log('[DEBUG] parseUrlHash: README or empty, returning null to trigger showHome');
+                        return { path: null, anchor: null };
+                    }
+                    // Otherwise can't scroll to anchor
+                    console.log('[DEBUG] parseUrlHash: no current path, returning null');
                     return { path: null, anchor: null };
                 }
             }
@@ -996,16 +1007,24 @@
 
                 // Normal hash-based navigation
                 const hash = window.location.hash;
+                console.log('[DEBUG] Processing hash:', hash);
                 if (hash && hash.startsWith('#')) {
                     const { path, anchor, scrollOnly } = parseUrlHash(hash);
+                    console.log('[DEBUG] Parsed result - path:', path, 'anchor:', anchor, 'scrollOnly:', scrollOnly);
                     if (scrollOnly && anchor) {
                         // Just scroll to anchor in current document
+                        console.log('[DEBUG] Scrolling to anchor');
                         setTimeout(() => scrollToAnchor(anchor), 100);
                     } else if (path) {
+                        console.log('[DEBUG] Loading markdown from path');
                         loadMarkdown(path, anchor);
+                    } else {
+                        console.log('[DEBUG] No path, calling showHome');
+                        showHome();
                     }
                 } else {
                     // No hash - show home (which loads the README)
+                    console.log('[DEBUG] No hash, calling showHome');
                     showHome();
                 }
             }, 100);

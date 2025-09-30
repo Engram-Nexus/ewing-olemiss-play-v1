@@ -535,11 +535,6 @@
     </div>
 
     <script>
-        console.log('[DEBUG] Script loaded - starting initialization');
-        console.log('[DEBUG] Current URL:', window.location.href);
-        console.log('[DEBUG] Hostname:', window.location.hostname);
-        console.log('[DEBUG] Pathname:', window.location.pathname);
-
         // Initialize Mermaid
         mermaid.initialize({
             startOnLoad: true,
@@ -592,7 +587,6 @@
 
         // Show home view - now loads the main README
         function showHome() {
-            console.log('[DEBUG] showHome() called');
             // Load the main README as the home page
             loadMarkdown('knowledge/ewing-proposal/README.md');
 
@@ -623,7 +617,6 @@
 
         // Load and render markdown file
         async function loadMarkdown(path, anchor = null) {
-            console.log('[DEBUG] loadMarkdown() called with path:', path, 'anchor:', anchor);
             // Extract anchor from path if present
             let targetPath = path;
             let targetAnchor = anchor;
@@ -661,44 +654,32 @@
             try {
                 // For GitHub Pages, we need to construct the correct URL
                 let fetchPath = targetPath;
-                console.log('[DEBUG] targetPath:', targetPath);
-                console.log('[DEBUG] hostname:', window.location.hostname);
-                console.log('[DEBUG] pathname:', window.location.pathname);
 
                 // Check if we're on GitHub Pages (detect by .github.io domain)
                 if (window.location.hostname.endsWith('.github.io')) {
-                    console.log('[DEBUG] Detected GitHub Pages');
                     // Remove leading ./ if present
                     if (fetchPath.startsWith('./')) {
                         fetchPath = fetchPath.substring(2);
-                        console.log('[DEBUG] Removed ./ prefix:', fetchPath);
                     }
                     // Ensure we have an absolute path
                     if (!fetchPath.startsWith('/')) {
                         fetchPath = '/' + fetchPath;
-                        console.log('[DEBUG] Added leading /:', fetchPath);
                     }
                     // Extract repo name from pathname (e.g., /repo-name/index.html => repo-name)
                     const pathParts = window.location.pathname.split('/').filter(p => p);
                     const repoName = pathParts.length > 0 ? pathParts[0] : '';
-                    console.log('[DEBUG] pathParts:', pathParts);
-                    console.log('[DEBUG] repoName:', repoName);
                     // Prepend repo name to create full path
                     if (repoName && !fetchPath.startsWith('/' + repoName + '/')) {
                         fetchPath = '/' + repoName + fetchPath;
-                        console.log('[DEBUG] Prepended repo name:', fetchPath);
                     }
                 }
 
-                console.log('[DEBUG] Final fetchPath:', fetchPath);
                 const response = await fetch(fetchPath);
-                console.log('[DEBUG] Response status:', response.status, response.ok);
                 if (!response.ok) {
                     throw new Error(`Failed to load: ${response.status}`);
                 }
 
                 let text = await response.text();
-                console.log('[DEBUG] Fetched text length:', text.length);
 
                 // Process internal links to work with our loader
                 text = text.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (match, linkText, linkPath) => {
@@ -872,8 +853,6 @@
                 }
 
             } catch (error) {
-                console.error('[DEBUG] Error in loadMarkdown:', error);
-                console.error('[DEBUG] Error stack:', error.stack);
                 document.getElementById('markdownContent').innerHTML = `
                     <div class="error">
                         <h2>Error Loading Content</h2>
@@ -908,31 +887,25 @@
 
         // Parse URL hash to extract file path and anchor
         function parseUrlHash(hash) {
-            console.log('[DEBUG] parseUrlHash called with:', hash);
             if (!hash || !hash.startsWith('#')) {
-                console.log('[DEBUG] parseUrlHash: no hash, returning null');
                 return { path: null, anchor: null };
             }
 
             // Remove leading #
             let hashContent = hash.substring(1);
-            console.log('[DEBUG] parseUrlHash hashContent:', hashContent);
 
             // Check if this is just an anchor without a path (e.g., #the-fundamental-belief)
             // Special case: #README should be treated as home, not an anchor
             if (hashContent && !hashContent.includes('/') && !hashContent.includes('#')) {
                 // This is a standalone anchor for the current document
                 if (currentPath) {
-                    console.log('[DEBUG] parseUrlHash: treating as scrollOnly anchor');
                     return { path: null, anchor: hashContent, scrollOnly: true };
                 } else {
                     // No current document loaded - if it's README, treat as home request
                     if (hashContent === 'README' || hashContent === '') {
-                        console.log('[DEBUG] parseUrlHash: README or empty, returning null to trigger showHome');
                         return { path: null, anchor: null };
                     }
                     // Otherwise can't scroll to anchor
-                    console.log('[DEBUG] parseUrlHash: no current path, returning null');
                     return { path: null, anchor: null };
                 }
             }
@@ -985,24 +958,19 @@
 
         // Handle direct URL navigation
         window.addEventListener('DOMContentLoaded', () => {
-            console.log('[DEBUG] DOMContentLoaded event fired');
             // Small delay to ensure all elements are ready
             setTimeout(() => {
-                console.log('[DEBUG] setTimeout callback executing');
                 try {
                     // Check if we have a pathname that should be converted
                     const pathname = window.location.pathname;
                     const pathParts = pathname.split('/');
-                    console.log('[DEBUG] pathParts:', pathParts);
 
                     // Look for folder-style URLs after the repo name
                     // e.g., /repo-name/overview/ or /repo-name/technology/primary-features/
                     if (pathParts.length > 2 && pathParts[pathParts.length - 2] !== '') {
-                        console.log('[DEBUG] Folder-style URL detected');
                         // We have a folder path, redirect to hash-based URL
                         const folderPath = pathParts.slice(2).join('/').replace(/\/$/, '');
                         if (folderPath) {
-                            console.log('[DEBUG] Redirecting to:', '#' + folderPath + '/');
                             // Redirect to hash-based URL
                             window.location.replace('#' + folderPath + '/');
                             return;
@@ -1011,29 +979,23 @@
 
                     // Normal hash-based navigation
                     const hash = window.location.hash;
-                    console.log('[DEBUG] Processing hash:', hash);
-                if (hash && hash.startsWith('#')) {
-                    const { path, anchor, scrollOnly } = parseUrlHash(hash);
-                    console.log('[DEBUG] Parsed result - path:', path, 'anchor:', anchor, 'scrollOnly:', scrollOnly);
-                    if (scrollOnly && anchor) {
-                        // Just scroll to anchor in current document
-                        console.log('[DEBUG] Scrolling to anchor');
-                        setTimeout(() => scrollToAnchor(anchor), 100);
-                    } else if (path) {
-                        console.log('[DEBUG] Loading markdown from path');
-                        loadMarkdown(path, anchor);
+                    if (hash && hash.startsWith('#')) {
+                        const { path, anchor, scrollOnly } = parseUrlHash(hash);
+                        if (scrollOnly && anchor) {
+                            // Just scroll to anchor in current document
+                            setTimeout(() => scrollToAnchor(anchor), 100);
+                        } else if (path) {
+                            loadMarkdown(path, anchor);
+                        } else {
+                            showHome();
+                        }
                     } else {
-                        console.log('[DEBUG] No path, calling showHome');
+                        // No hash - show home (which loads the README)
                         showHome();
                     }
-                } else {
-                    // No hash - show home (which loads the README)
-                    console.log('[DEBUG] No hash, calling showHome');
-                    showHome();
-                }
                 } catch (error) {
-                    console.error('[DEBUG] Error in DOMContentLoaded handler:', error);
-                    console.error('[DEBUG] Error stack:', error.stack);
+                    console.error('Error in navigation:', error);
+                    showHome();
                 }
             }, 100);
         });

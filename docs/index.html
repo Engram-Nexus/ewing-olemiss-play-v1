@@ -989,25 +989,29 @@
             // Small delay to ensure all elements are ready
             setTimeout(() => {
                 console.log('[DEBUG] setTimeout callback executing');
-                // Check if we have a pathname that should be converted
-                const pathname = window.location.pathname;
-                const pathParts = pathname.split('/');
+                try {
+                    // Check if we have a pathname that should be converted
+                    const pathname = window.location.pathname;
+                    const pathParts = pathname.split('/');
+                    console.log('[DEBUG] pathParts:', pathParts);
 
-                // Look for folder-style URLs after the repo name
-                // e.g., /repo-name/overview/ or /repo-name/technology/primary-features/
-                if (pathParts.length > 2 && pathParts[pathParts.length - 2] !== '') {
-                    // We have a folder path, redirect to hash-based URL
-                    const folderPath = pathParts.slice(2).join('/').replace(/\/$/, '');
-                    if (folderPath) {
-                        // Redirect to hash-based URL
-                        window.location.replace('#' + folderPath + '/');
-                        return;
+                    // Look for folder-style URLs after the repo name
+                    // e.g., /repo-name/overview/ or /repo-name/technology/primary-features/
+                    if (pathParts.length > 2 && pathParts[pathParts.length - 2] !== '') {
+                        console.log('[DEBUG] Folder-style URL detected');
+                        // We have a folder path, redirect to hash-based URL
+                        const folderPath = pathParts.slice(2).join('/').replace(/\/$/, '');
+                        if (folderPath) {
+                            console.log('[DEBUG] Redirecting to:', '#' + folderPath + '/');
+                            // Redirect to hash-based URL
+                            window.location.replace('#' + folderPath + '/');
+                            return;
+                        }
                     }
-                }
 
-                // Normal hash-based navigation
-                const hash = window.location.hash;
-                console.log('[DEBUG] Processing hash:', hash);
+                    // Normal hash-based navigation
+                    const hash = window.location.hash;
+                    console.log('[DEBUG] Processing hash:', hash);
                 if (hash && hash.startsWith('#')) {
                     const { path, anchor, scrollOnly } = parseUrlHash(hash);
                     console.log('[DEBUG] Parsed result - path:', path, 'anchor:', anchor, 'scrollOnly:', scrollOnly);
@@ -1026,6 +1030,10 @@
                     // No hash - show home (which loads the README)
                     console.log('[DEBUG] No hash, calling showHome');
                     showHome();
+                }
+                } catch (error) {
+                    console.error('[DEBUG] Error in DOMContentLoaded handler:', error);
+                    console.error('[DEBUG] Error stack:', error.stack);
                 }
             }, 100);
         });

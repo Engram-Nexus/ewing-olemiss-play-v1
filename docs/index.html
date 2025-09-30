@@ -760,11 +760,12 @@
                     // Normalize path
                     absolutePath = absolutePath.replace(/\/+/g, '/');
 
-                    // Create onclick handler
+                    // Create a special marker link that we'll convert to onclick after markdown parsing
+                    // Using a data attribute to store the path
                     if (anchor) {
-                        return `[${linkText}](#" onclick="loadMarkdown('${absolutePath}', '${anchor}'); return false;)`;
+                        return `[${linkText}](#__INTERNAL_LINK__${absolutePath}__ANCHOR__${anchor})`;
                     } else {
-                        return `[${linkText}](#" onclick="loadMarkdown('${absolutePath}'); return false;)`;
+                        return `[${linkText}](#__INTERNAL_LINK__${absolutePath})`;
                     }
                 });
 
@@ -778,6 +779,32 @@
                     html = `<pre>${text}</pre>`;
                 }
                 document.getElementById('markdownContent').innerHTML = html;
+
+                // Post-process internal links to add onclick handlers
+                document.querySelectorAll('#markdownContent a[href^="#__INTERNAL_LINK__"]').forEach(link => {
+                    const href = link.getAttribute('href');
+                    if (href.includes('__ANCHOR__')) {
+                        // Has anchor
+                        const parts = href.replace('#__INTERNAL_LINK__', '').split('__ANCHOR__');
+                        const path = parts[0];
+                        const anchor = parts[1];
+                        link.setAttribute('href', '#');
+                        link.onclick = function(e) {
+                            e.preventDefault();
+                            loadMarkdown(path, anchor);
+                            return false;
+                        };
+                    } else {
+                        // No anchor
+                        const path = href.replace('#__INTERNAL_LINK__', '');
+                        link.setAttribute('href', '#');
+                        link.onclick = function(e) {
+                            e.preventDefault();
+                            loadMarkdown(path);
+                            return false;
+                        };
+                    }
+                });
 
                 // Post-process to add IDs to headings
                 document.querySelectorAll('#markdownContent h1, #markdownContent h2, #markdownContent h3, #markdownContent h4, #markdownContent h5, #markdownContent h6').forEach(heading => {

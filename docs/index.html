@@ -655,18 +655,29 @@
                 // For GitHub Pages, we need to construct the correct URL
                 let fetchPath = targetPath;
 
-                // Check if we're on GitHub Pages (not local development)
-                if (window.location.hostname === 'engram-nexus.github.io') {
+                // Check if we're on GitHub Pages (detect by .github.io domain)
+                if (window.location.hostname.endsWith('.github.io')) {
                     // Remove leading ./ if present
                     if (fetchPath.startsWith('./')) {
                         fetchPath = fetchPath.substring(2);
                     }
-                    // Ensure we have an absolute path from the repository root
+                    // Ensure we have an absolute path
                     if (!fetchPath.startsWith('/')) {
                         fetchPath = '/' + fetchPath;
                     }
-                    // Prepend only the repository name (GitHub Pages serves from /docs/ but URLs don't include it)
-                    fetchPath = '/ewing-olemiss-play-v1' + fetchPath;
+                    // Extract repo name from pathname (e.g., /repo-name/... => repo-name)
+                    const pathParts = window.location.pathname.split('/').filter(p => p);
+                    const repoName = pathParts.length > 0 ? pathParts[0] : '';
+                    // Prepend repo name if this is a project site
+                    if (repoName && !window.location.pathname.startsWith('/' + repoName + '/')) {
+                        fetchPath = '/' + repoName + fetchPath;
+                    } else if (repoName) {
+                        // Already has repo name in current path, use it as base
+                        const basePath = '/' + repoName;
+                        if (!fetchPath.startsWith(basePath)) {
+                            fetchPath = basePath + fetchPath;
+                        }
+                    }
                 }
 
                 console.log('Fetching from:', fetchPath); // Debug log
@@ -956,7 +967,7 @@
                 const pathParts = pathname.split('/');
 
                 // Look for folder-style URLs after the repo name
-                // e.g., /ewing-olemiss-play-v1/overview/ or /ewing-olemiss-play-v1/technology/primary-features/
+                // e.g., /repo-name/overview/ or /repo-name/technology/primary-features/
                 if (pathParts.length > 2 && pathParts[pathParts.length - 2] !== '') {
                     // We have a folder path, redirect to hash-based URL
                     const folderPath = pathParts.slice(2).join('/').replace(/\/$/, '');

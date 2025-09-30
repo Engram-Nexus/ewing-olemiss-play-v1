@@ -668,8 +668,8 @@
                     if (!fetchPath.startsWith('/')) {
                         fetchPath = '/' + fetchPath;
                     }
-                    // Prepend the repository name for GitHub Pages project sites
-                    fetchPath = '/ewing-olemiss-play-v1' + fetchPath;
+                    // Prepend the repository name and docs folder for GitHub Pages project sites
+                    fetchPath = '/ewing-olemiss-play-v1/docs' + fetchPath;
                 }
 
                 console.log('Fetching from:', fetchPath); // Debug log

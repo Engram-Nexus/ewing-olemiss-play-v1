@@ -535,6 +535,11 @@
     </div>
 
     <script>
+        console.log('[DEBUG] Script loaded - starting initialization');
+        console.log('[DEBUG] Current URL:', window.location.href);
+        console.log('[DEBUG] Hostname:', window.location.hostname);
+        console.log('[DEBUG] Pathname:', window.location.pathname);
+
         // Initialize Mermaid
         mermaid.initialize({
             startOnLoad: true,
@@ -969,8 +974,10 @@
 
         // Handle direct URL navigation
         window.addEventListener('DOMContentLoaded', () => {
+            console.log('[DEBUG] DOMContentLoaded event fired');
             // Small delay to ensure all elements are ready
             setTimeout(() => {
+                console.log('[DEBUG] setTimeout callback executing');
                 // Check if we have a pathname that should be converted
                 const pathname = window.location.pathname;
                 const pathParts = pathname.split('/');

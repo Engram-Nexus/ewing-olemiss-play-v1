@@ -587,6 +587,7 @@
 
         // Show home view - now loads the main README
         function showHome() {
+            console.log('[DEBUG] showHome() called');
             // Load the main README as the home page
             loadMarkdown('knowledge/ewing-proposal/README.md');
 
@@ -617,6 +618,7 @@
 
         // Load and render markdown file
         async function loadMarkdown(path, anchor = null) {
+            console.log('[DEBUG] loadMarkdown() called with path:', path, 'anchor:', anchor);
             // Extract anchor from path if present
             let targetPath = path;
             let targetAnchor = anchor;
@@ -654,33 +656,44 @@
             try {
                 // For GitHub Pages, we need to construct the correct URL
                 let fetchPath = targetPath;
+                console.log('[DEBUG] targetPath:', targetPath);
+                console.log('[DEBUG] hostname:', window.location.hostname);
+                console.log('[DEBUG] pathname:', window.location.pathname);
 
                 // Check if we're on GitHub Pages (detect by .github.io domain)
                 if (window.location.hostname.endsWith('.github.io')) {
+                    console.log('[DEBUG] Detected GitHub Pages');
                     // Remove leading ./ if present
                     if (fetchPath.startsWith('./')) {
                         fetchPath = fetchPath.substring(2);
+                        console.log('[DEBUG] Removed ./ prefix:', fetchPath);
                     }
                     // Ensure we have an absolute path
                     if (!fetchPath.startsWith('/')) {
                         fetchPath = '/' + fetchPath;
+                        console.log('[DEBUG] Added leading /:', fetchPath);
                     }
                     // Extract repo name from pathname (e.g., /repo-name/index.html => repo-name)
                     const pathParts = window.location.pathname.split('/').filter(p => p);
                     const repoName = pathParts.length > 0 ? pathParts[0] : '';
+                    console.log('[DEBUG] pathParts:', pathParts);
+                    console.log('[DEBUG] repoName:', repoName);
                     // Prepend repo name to create full path
                     if (repoName && !fetchPath.startsWith('/' + repoName + '/')) {
                         fetchPath = '/' + repoName + fetchPath;
+                        console.log('[DEBUG] Prepended repo name:', fetchPath);
                     }
                 }
 
-                console.log('Fetching from:', fetchPath); // Debug log
+                console.log('[DEBUG] Final fetchPath:', fetchPath);
                 const response = await fetch(fetchPath);
+                console.log('[DEBUG] Response status:', response.status, response.ok);
                 if (!response.ok) {
                     throw new Error(`Failed to load: ${response.status}`);
                 }
 
                 let text = await response.text();
+                console.log('[DEBUG] Fetched text length:', text.length);
 
                 // Process internal links to work with our loader
                 text = text.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (match, linkText, linkPath) => {
@@ -854,6 +867,8 @@
                 }
 
             } catch (error) {
+                console.error('[DEBUG] Error in loadMarkdown:', error);
+                console.error('[DEBUG] Error stack:', error.stack);
                 document.getElementById('markdownContent').innerHTML = `
                     <div class="error">
                         <h2>Error Loading Content</h2>

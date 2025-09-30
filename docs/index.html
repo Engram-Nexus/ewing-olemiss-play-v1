@@ -661,13 +661,12 @@
                     if (fetchPath.startsWith('./')) {
                         fetchPath = fetchPath.substring(2);
                     }
-                    // knowledge paths stay as-is (don't remove the dot)
                     // Ensure we have an absolute path from the repository root
                     if (!fetchPath.startsWith('/')) {
                         fetchPath = '/' + fetchPath;
                     }
-                    // Prepend the repository name and docs folder for GitHub Pages project sites
-                    fetchPath = '/ewing-olemiss-play-v1/docs' + fetchPath;
+                    // Prepend only the repository name (GitHub Pages serves from /docs/ but URLs don't include it)
+                    fetchPath = '/ewing-olemiss-play-v1' + fetchPath;
                 }
 
                 console.log('Fetching from:', fetchPath); // Debug log

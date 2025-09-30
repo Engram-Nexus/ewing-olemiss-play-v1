@@ -657,13 +657,11 @@
 
                 // Check if we're on GitHub Pages (not local development)
                 if (window.location.hostname === 'engram-nexus.github.io') {
-                    // Remove leading ./ if present and also handle .knowledge/ paths
+                    // Remove leading ./ if present
                     if (fetchPath.startsWith('./')) {
                         fetchPath = fetchPath.substring(2);
-                    } else if (fetchPath.startsWith('.knowledge/')) {
-                        // Remove the leading dot for .knowledge paths
-                        fetchPath = fetchPath.substring(1);
                     }
+                    // .knowledge paths stay as-is (don't remove the dot)
                     // Ensure we have an absolute path from the repository root
                     if (!fetchPath.startsWith('/')) {
                         fetchPath = '/' + fetchPath;

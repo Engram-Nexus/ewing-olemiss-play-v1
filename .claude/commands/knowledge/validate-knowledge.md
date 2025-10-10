@@ -36,7 +36,7 @@ Input: $ARGUMENTS (format: topic/subtopic [--fix] [--verbose])
   - **Format**: `topic` validates entire topic structure
   - **Format**: `topic/subtopic` validates specific subtopic
   - **Format**: `topic/subtopic1/subtopic2` supports nested validation
-  - **CRITICAL**: Path must exist in .knowledge directory
+  - **CRITICAL**: Path must exist in docs/knowledge directory
 - `[--fix]`: Automatically fix discovered issues where possible
   - **Optional**: If omitted, validation is read-only
   - **Actions**: Creates missing README files, fixes formatting issues
@@ -103,7 +103,7 @@ This command performs comprehensive validation of knowledge structures, ensuring
    fi
    
    # Determine validation target
-   KNOWLEDGE_BASE=".knowledge"
+   KNOWLEDGE_BASE="docs/knowledge"
    FULL_PATH="$KNOWLEDGE_BASE/$TOPIC"
    
    if [[ -n "$SUBTOPIC_PATH" ]]; then
@@ -399,7 +399,7 @@ EOF
 
 ## Requirements
 
-- Read access to .knowledge directory
+- Read access to docs/knowledge directory
 - Find, grep, and tree utilities
 - Bash shell for advanced pattern matching
 - Write access when using --fix mode

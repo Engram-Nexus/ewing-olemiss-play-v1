@@ -36,7 +36,7 @@ Input: $ARGUMENTS (format: topic/subtopic [--recursive] [--template=standard|com
   - **Format**: `topic` generates matrix for entire topic
   - **Format**: `topic/subtopic` generates matrix for specific subtopic
   - **Format**: `topic/subtopic1/subtopic2` supports nested matrix generation
-  - **CRITICAL**: Path must exist in .knowledge directory
+  - **CRITICAL**: Path must exist in docs/knowledge directory
 - `[--recursive]`: Generate matrices for all subdirectories recursively
   - **Optional**: If omitted, generates matrix only for target directory
   - **Processing**: Updates all child matrices in the entire tree
@@ -110,7 +110,7 @@ This command generates comprehensive knowledge matrices (README.md files) that i
    fi
    
    # Determine generation target
-   KNOWLEDGE_BASE=".knowledge"
+   KNOWLEDGE_BASE="docs/knowledge"
    FULL_PATH="$KNOWLEDGE_BASE/$TOPIC"
    
    if [[ -n "$SUBTOPIC_PATH" ]]; then
@@ -560,7 +560,7 @@ EOF
 
 ## Requirements
 
-- Write access to .knowledge directory
+- Write access to docs/knowledge directory
 - Find, grep, wc, and date utilities
 - Bash shell for template processing
 - **CRITICAL**: Target knowledge directory must exist

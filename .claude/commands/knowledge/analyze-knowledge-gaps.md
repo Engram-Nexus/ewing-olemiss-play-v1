@@ -36,7 +36,7 @@ Input: $ARGUMENTS (format: topic/subtopic [--depth=shallow|deep] [--suggest-fixe
   - **Format**: `topic` analyzes entire topic for missing coverage
   - **Format**: `topic/subtopic` analyzes specific subtopic gaps
   - **Format**: `topic/subtopic1/subtopic2` supports nested analysis
-  - **CRITICAL**: Path must exist in .knowledge directory
+  - **CRITICAL**: Path must exist in docs/knowledge directory
 - `[--depth=shallow|deep]`: Analysis depth level (default: shallow)
   - **shallow**: Surface-level gap analysis focusing on structure
   - **deep**: Comprehensive analysis including content quality and relationships
@@ -108,7 +108,7 @@ This command performs intelligent analysis of knowledge structures to identify m
    fi
    
    # Determine analysis target
-   KNOWLEDGE_BASE=".knowledge"
+   KNOWLEDGE_BASE="docs/knowledge"
    FULL_PATH="$KNOWLEDGE_BASE/$TOPIC"
    
    if [[ -n "$SUBTOPIC_PATH" ]]; then
@@ -413,7 +413,7 @@ This command performs intelligent analysis of knowledge structures to identify m
 
 ## Requirements
 
-- Read access to .knowledge directory
+- Read access to docs/knowledge directory
 - Find, grep, wc, and awk utilities
 - Bash shell for advanced analysis
 - Tree command for structure visualization

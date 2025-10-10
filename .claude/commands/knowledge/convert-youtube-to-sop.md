@@ -43,9 +43,9 @@ This command converts a YouTube video transcript into a Standard Operating Proce
   - **Format**: `topic/subtopic:block` creates named SOP block (e.g., `development/workflows:setup-guide`)
   - **Format**: `topic/subtopic1/subtopic2:block` supports infinite nesting
   - **Path Examples**:
-    - `development:claude-setup` → `.knowledge/development/claude-setup-sop.md`
-    - `devops/deployment:docker-guide` → `.knowledge/devops/deployment/docker-guide-sop.md`
-    - `support/troubleshooting:common-issues` → `.knowledge/support/troubleshooting/common-issues-sop.md`
+    - `development:claude-setup` → `docs/knowledge/development/claude-setup-sop.md`
+    - `devops/deployment:docker-guide` → `docs/knowledge/devops/deployment/docker-guide-sop.md`
+    - `support/troubleshooting:common-issues` → `docs/knowledge/support/troubleshooting/common-issues-sop.md`
 - `<youtube-url>`: The full YouTube video URL
   - Must be a valid YouTube URL (youtube.com/watch?v= or youtu.be/)
   - Used for metadata and timestamp linking
@@ -110,12 +110,12 @@ This command converts a YouTube video transcript into a Standard Operating Proce
    - Adds introduction/summary linking to knowledge context
 
 6. **Saves to knowledge base structure**
-   - Creates file in `.knowledge/{topic}/{subtopic}/{block-name}-sop.md`
+   - Creates file in `docs/knowledge/{topic}/{subtopic}/{block-name}-sop.md`
    - Ensures directory structure exists
    - Filename format: `{block-name}-sop.md` or `sop-{video-id}.md` if no block specified
    - Example paths:
-     - `development:setup` → `.knowledge/development/setup-sop.md`
-     - `devops/deployment:docker` → `.knowledge/devops/deployment/docker-sop.md`
+     - `development:setup` → `docs/knowledge/development/setup-sop.md`
+     - `devops/deployment:docker` → `docs/knowledge/devops/deployment/docker-sop.md`
 
 7. **Updates knowledge matrices**
    - Regenerates README.md matrices for affected topic/subtopic
@@ -130,7 +130,7 @@ This command converts a YouTube video transcript into a Standard Operating Proce
    - Ensures SOP fits cohesively within knowledge architecture
 
 9. **Commits changes**
-   - RUN `git add .knowledge/` - Stage all knowledge changes
+   - RUN `git add docs/knowledge/` - Stage all knowledge changes
    - RUN `git commit -m "docs(knowledge): add SOP from YouTube video {video-id} to {topic/subtopic}"` - Commit
    - **NOTE**: Changes are committed to the current branch
 
@@ -140,7 +140,7 @@ The command creates/updates files in the knowledge base structure:
 
 ### Knowledge Base Organization
 ```
-.knowledge/
+docs/knowledge/
 ├── {topic}/                         # Topic directory
 │   ├── README.md                    # Topic matrix (updated)
 │   ├── {block-name}-sop.md         # SOP block in topic root
@@ -154,7 +154,7 @@ The command creates/updates files in the knowledge base structure:
 
 ### Example Structure
 ```
-.knowledge/
+docs/knowledge/
 ├── development/
 │   ├── README.md                    # Updated with setup-sop.md reference
 │   ├── setup-sop.md                # From development:setup path
@@ -326,34 +326,34 @@ fi
 ## Common RUN Commands
 
 ### Knowledge Base Validation
-- RUN `mkdir -p .knowledge/{topic}` - Create topic directory if needed
-- RUN `mkdir -p .knowledge/{topic}/{subtopic}` - Create subtopic directory if needed
-- RUN `test -d .knowledge/{topic}` - Check if topic exists
-- RUN `find .knowledge/{topic} -name "README.md"` - List existing matrices
+- RUN `mkdir -p docs/knowledge/{topic}` - Create topic directory if needed
+- RUN `mkdir -p docs/knowledge/{topic}/{subtopic}` - Create subtopic directory if needed
+- RUN `test -d docs/knowledge/{topic}` - Check if topic exists
+- RUN `find docs/knowledge/{topic} -name "README.md"` - List existing matrices
 
 ### Path Parsing and Validation
 - RUN `echo "{topic/subtopic:block}" | grep -E "^[a-z0-9-]+(/[a-z0-9-]+)*(:([a-z0-9-]+))?$"` - Validate path format
 - RUN `[[ "{path}" == *":"* ]] && echo "Block specified" || echo "Topic/subtopic only"` - Check for block specification
 
 ### File Operations
-- RUN `touch .knowledge/{topic}/{subtopic}/{block-name}-sop.md` - Create SOP file
-- RUN `cat .knowledge/{topic}/{subtopic}/{block-name}-sop.md` - Read generated SOP
-- RUN `ls .knowledge/{topic}/{subtopic}/` - List blocks in subtopic
-- RUN `find .knowledge/{topic} -name "*-sop.md"` - List all SOPs in topic
+- RUN `touch docs/knowledge/{topic}/{subtopic}/{block-name}-sop.md` - Create SOP file
+- RUN `cat docs/knowledge/{topic}/{subtopic}/{block-name}-sop.md` - Read generated SOP
+- RUN `ls docs/knowledge/{topic}/{subtopic}/` - List blocks in subtopic
+- RUN `find docs/knowledge/{topic} -name "*-sop.md"` - List all SOPs in topic
 
 ### Knowledge Matrix Operations
-- RUN `cat .knowledge/{topic}/README.md` - View topic matrix
-- RUN `cat .knowledge/{topic}/{subtopic}/README.md` - View subtopic matrix
-- RUN `grep -l "{block-name}-sop" .knowledge/{topic}/*/README.md` - Find matrix references
+- RUN `cat docs/knowledge/{topic}/README.md` - View topic matrix
+- RUN `cat docs/knowledge/{topic}/{subtopic}/README.md` - View subtopic matrix
+- RUN `grep -l "{block-name}-sop" docs/knowledge/{topic}/*/README.md` - Find matrix references
 
 ### Git Operations
-- RUN `git add .knowledge/` - Stage all knowledge changes
+- RUN `git add docs/knowledge/` - Stage all knowledge changes
 - RUN `git commit -m "docs(knowledge): add SOP from YouTube video {video-id} to {topic/subtopic}"` - Commit
 
 ## Requirements
 
 - Git repository for version control
-- Write permissions to `.knowledge/` directory
+- Write permissions to `docs/knowledge/` directory
 - Transcript text (obtained manually or via tools)
 - Valid knowledge base structure (topics and subtopics follow naming conventions)
 
@@ -379,7 +379,7 @@ fi
 - **Cross-References**: SOPs automatically link to related knowledge within the same topic/subtopic
 - **Statement Focus**: User statement should describe SOP content and context, not placement (determined by path)
 - **Branch Operation**: Command works within the current branch - no branch switching occurs
-- **Knowledge Architecture**: Follows established `.knowledge/` structure with topics, subtopics, and blocks
+- **Knowledge Architecture**: Follows established `docs/knowledge/` structure with topics, subtopics, and blocks
 
 ## Integration Benefits
 
@@ -398,7 +398,7 @@ fi
 
 ### v2.3.0
 - **MAJOR**: Added knowledge base integration with `<topic/subtopic:block>` argument
-- SOPs now stored in `.knowledge/` structure instead of `docs/sops/`
+- SOPs now stored in `docs/knowledge/` structure instead of `docs/sops/`
 - Automatic knowledge matrix updates for topic and subtopic README.md files
 - Enhanced SOP format with knowledge context and cross-references
 - Path parsing for infinite subtopic nesting support

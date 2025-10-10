@@ -322,13 +322,13 @@ This meta-command orchestrates the complete knowledge update workflow, managing 
    echo "📝 Committing knowledge updates..."
    
    # Verify knowledge changes exist
-   if [ -z "$(git status --porcelain .knowledge/)" ]; then
+   if [ -z "$(git status --porcelain docs/knowledge/)" ]; then
        echo "⚠️  No knowledge changes detected"
        echo "The update-knowledge command may not have made changes"
        git status
    else
        # Stage knowledge directory changes
-       git add .knowledge/
+       git add docs/knowledge/
        
        # Generate conventional commit message
        TOPIC_PATH="$1"
@@ -427,7 +427,7 @@ This meta-command orchestrates the complete knowledge update workflow, managing 
    
    ## Changes Made
    - Converted YouTube video content to structured SOP documentation
-   - Integrated SOP into \`.knowledge/\` directory structure
+   - Integrated SOP into \`docs/knowledge/\` directory structure
    - Updated knowledge matrices to include new SOP block
    - Applied agent orchestration for comprehensive content analysis
    - Generated step-by-step procedures with timestamp references
@@ -463,7 +463,7 @@ This meta-command orchestrates the complete knowledge update workflow, managing 
    $(if [[ -n "$STATEMENT" ]]; then echo "**Content**: $STATEMENT"; fi)
    
    ## Changes Made
-   - Updated knowledge structure in \`.knowledge/\` directory
+   - Updated knowledge structure in \`docs/knowledge/\` directory
    - Integrated agent research and architectural guidance
    - Regenerated matrices with enhanced subtopic support
    
@@ -528,7 +528,7 @@ This meta-command orchestrates the complete knowledge update workflow, managing 
    echo "3. Merge after approval to integrate knowledge updates"
    echo ""
    echo "🔍 Validate structure:"
-   echo "   tree .knowledge/$(echo "$TOPIC_PATH" | cut -d':' -f1)"
+   echo "   tree docs/knowledge/$(echo "$TOPIC_PATH" | cut -d':' -f1)"
    echo ""
    ```
 
@@ -541,9 +541,9 @@ This meta-command orchestrates the complete knowledge update workflow, managing 
 - RUN `git diff --name-only` - See changed files
 
 ### Knowledge Structure Validation
-- RUN `tree .knowledge/<topic>` - Display knowledge structure
-- RUN `find .knowledge/<topic> -name "*.md"` - List all knowledge files
-- RUN `grep -r "^#" .knowledge/<topic>/` - Show all headers and structure
+- RUN `tree docs/knowledge/<topic>` - Display knowledge structure
+- RUN `find docs/knowledge/<topic> -name "*.md"` - List all knowledge files
+- RUN `grep -r "^#" docs/knowledge/<topic>/` - Show all headers and structure
 
 ### Pull Request Management
 - RUN `gh pr list` - List open pull requests
@@ -557,7 +557,7 @@ This meta-command orchestrates the complete knowledge update workflow, managing 
 - Clean working directory (no uncommitted changes)
 - Valid base branch exists in repository
 - Access to update-knowledge command for processing delegation
-- Write permissions to .knowledge/ directory
+- Write permissions to docs/knowledge/ directory
 
 ## Error Handling
 

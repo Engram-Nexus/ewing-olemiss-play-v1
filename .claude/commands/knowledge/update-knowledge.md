@@ -143,7 +143,7 @@ This command processes knowledge content using agent orchestration to create str
    **🚀 DUAL-AGENT ORCHESTRATION WORKFLOW:**
    ```bash
    # Build full path for knowledge storage
-   KNOWLEDGE_BASE=".knowledge"
+   KNOWLEDGE_BASE="docs/knowledge"
    FULL_PATH="$KNOWLEDGE_BASE/$TOPIC"
    
    if [[ -n "$SUBTOPIC_PATH" ]]; then
@@ -548,9 +548,9 @@ EOF
    ```
 
 3. **Validate knowledge structure and completion**
-   - RUN `tree .knowledge/$TOPIC` - Show full topic structure with subtopics
-   - RUN `find .knowledge/$TOPIC -name "README.md"` - List all matrix files
-   - RUN `find .knowledge/$TOPIC -name "*.md" -not -name "README.md"` - List all blocks
+   - RUN `tree docs/knowledge/$TOPIC` - Show full topic structure with subtopics
+   - RUN `find docs/knowledge/$TOPIC -name "README.md"` - List all matrix files
+   - RUN `find docs/knowledge/$TOPIC -name "*.md" -not -name "README.md"` - List all blocks
    - **CRITICAL**: Ensure matrix files exist at each level
    - **NEW**: Verify subtopic folders are properly nested
 
@@ -579,31 +579,31 @@ The command provides graceful fallback when scripts are unavailable:
 ## Common RUN Commands
 
 ### Knowledge Structure Operations
-- RUN `tree .knowledge/<topic>` - Show full topic tree with subtopics
-- RUN `find .knowledge/<topic> -type d` - List all subtopic directories
-- RUN `find .knowledge/<topic> -name "*.md"` - List all knowledge files
-- RUN `ls -la .knowledge/<topic>/<subtopic>/` - Show subtopic contents
+- RUN `tree docs/knowledge/<topic>` - Show full topic tree with subtopics
+- RUN `find docs/knowledge/<topic> -type d` - List all subtopic directories
+- RUN `find docs/knowledge/<topic> -name "*.md"` - List all knowledge files
+- RUN `ls -la docs/knowledge/<topic>/<subtopic>/` - Show subtopic contents
 
 ### Content Analysis
-- RUN `grep -r "pattern" .knowledge/<topic>/` - Search across topic and subtopics
-- RUN `find .knowledge/<topic> -name "README.md" -exec wc -l {} \;` - Count matrix lines
-- RUN `cat .knowledge/<topic>/<subtopic>/README.md` - View subtopic matrix
+- RUN `grep -r "pattern" docs/knowledge/<topic>/` - Search across topic and subtopics
+- RUN `find docs/knowledge/<topic> -name "README.md" -exec wc -l {} \;` - Count matrix lines
+- RUN `cat docs/knowledge/<topic>/<subtopic>/README.md` - View subtopic matrix
 
 ### Validation
-- RUN `find .knowledge -type d -not -exec test -e '{}/README.md' \; -print` - Find folders without matrices
-- RUN `tree -I 'README.md' .knowledge/<topic>` - Show structure without matrices
-- RUN `find .knowledge/<topic> -empty` - Find empty files or directories
+- RUN `find docs/knowledge -type d -not -exec test -e '{}/README.md' \; -print` - Find folders without matrices
+- RUN `tree -I 'README.md' docs/knowledge/<topic>` - Show structure without matrices
+- RUN `find docs/knowledge/<topic> -empty` - Find empty files or directories
 
 ### Matrix Consistency Enforcement
-- RUN `[[ -f ".claude/scripts/knowledge/update-knowledge_matrix-regenerator.sh" ]] && ".claude/scripts/knowledge/update-knowledge_matrix-regenerator.sh" .knowledge/<topic> --recursive || "../scripts/update-knowledge_matrix-regenerator.sh" .knowledge/<topic> --recursive` - Regenerate all matrices recursively
-- RUN `grep -L "### Subtopics" .knowledge/<topic>/*/README.md 2>/dev/null` - Find matrices missing subtopics section
-- RUN `grep -L "### Blocks" .knowledge/<topic>/*/README.md 2>/dev/null` - Find matrices missing blocks section
-- RUN `SCRIPT_PATH=".claude/scripts/knowledge/update-knowledge_matrix-regenerator.sh"; [[ ! -f "$SCRIPT_PATH" ]] && SCRIPT_PATH="../scripts/update-knowledge_matrix-regenerator.sh"; diff -q .knowledge/<topic>/README.md <("$SCRIPT_PATH" .knowledge/<topic> && cat .knowledge/<topic>/README.md)` - Verify matrix consistency
+- RUN `[[ -f ".claude/scripts/knowledge/update-knowledge_matrix-regenerator.sh" ]] && ".claude/scripts/knowledge/update-knowledge_matrix-regenerator.sh" docs/knowledge/<topic> --recursive || "../scripts/update-knowledge_matrix-regenerator.sh" docs/knowledge/<topic> --recursive` - Regenerate all matrices recursively
+- RUN `grep -L "### Subtopics" docs/knowledge/<topic>/*/README.md 2>/dev/null` - Find matrices missing subtopics section
+- RUN `grep -L "### Blocks" docs/knowledge/<topic>/*/README.md 2>/dev/null` - Find matrices missing blocks section
+- RUN `SCRIPT_PATH=".claude/scripts/knowledge/update-knowledge_matrix-regenerator.sh"; [[ ! -f "$SCRIPT_PATH" ]] && SCRIPT_PATH="../scripts/update-knowledge_matrix-regenerator.sh"; diff -q docs/knowledge/<topic>/README.md <("$SCRIPT_PATH" docs/knowledge/<topic> && cat docs/knowledge/<topic>/README.md)` - Verify matrix consistency
 
 ## Requirements
 
 ### System Dependencies
-- Write access to knowledge directory (`.knowledge/`)
+- Write access to knowledge directory (`docs/knowledge/`)
 - Bash shell environment for script execution
 - Standard UNIX utilities: `find`, `grep`, `tree`, `cut`, `sort`
 
@@ -619,7 +619,7 @@ The command provides graceful fallback when scripts are unavailable:
 - Optimized scripts for 75% faster matrix generation
 
 ### File System Requirements
-- **CRITICAL**: Knowledge directory (`.knowledge/`) must be writable
+- **CRITICAL**: Knowledge directory (`docs/knowledge/`) must be writable
 - Sufficient disk space for nested subtopic hierarchies
 - Directory creation permissions for automatic folder structure setup
 
@@ -631,7 +631,7 @@ The command provides graceful fallback when scripts are unavailable:
 - **Empty Statement for Block**: Requires content when creating/updating specific blocks
 
 ### File System Errors
-- **Missing Knowledge Directory**: Creates `.knowledge/` structure automatically
+- **Missing Knowledge Directory**: Creates `docs/knowledge/` structure automatically
 - **Permission Denied**: Clear error messages with resolution steps for directory permissions
 - **Invalid Characters**: Sanitizes topic/subtopic/block names removing special characters
 - **Disk Space Issues**: Detects and reports storage limitations with cleanup suggestions
